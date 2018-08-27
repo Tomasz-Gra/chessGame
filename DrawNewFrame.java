@@ -5,19 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class DrawNewFrame implements ActionListener {
-    private JFrame drawFrame = new JFrame("GridLayout");
-    private JFrame drawSecondFrame = new JFrame("GridLayout");
-    private JFrame drawTemporaryFrame = new JFrame();
-    private JButton[] button = new JButton[64];
-    private JButton[] buttonTwo = new JButton[64];
-
-    private JTextField[] temporaryTextfield = new JTextField[2];
-    private JButton move = new JButton("Move!");
-    private JButton start = new JButton("Start new game!");
-
-    private ActionListener actionListener = actionEvent -> temporaryTextfield[0].setText(actionEvent.getActionCommand());
-    private ActionListener actionListenerNumberTwo = actionEvent -> temporaryTextfield[1].setText(actionEvent.getActionCommand());
+class drawChessBoard implements ActionListener {
 
     private ImageIcon blackPawn = new ImageIcon("img/black-pawn.png");
     private ImageIcon blackRook = new ImageIcon("img/black-rook.png");
@@ -32,129 +20,76 @@ class DrawNewFrame implements ActionListener {
     private ImageIcon whiteQueen = new ImageIcon("img/white-queen.png");
     private ImageIcon whiteKing = new ImageIcon("img/white-king.png");
 
-    void drawFrameGUI() {
-        Font textFont = new Font("Times New Roman", Font.PLAIN, 1);
-        for (int newButton = 0; newButton < button.length; newButton++) {
-            button[newButton] = new JButton(Integer.toString(newButton));
-            button[newButton].setFocusPainted(false);
-            button[newButton].addActionListener(actionListener);
-            button[newButton].setFont(textFont);
-            drawFrame.add(button[newButton]);
-        }
+    private JButton[][] button = new JButton[8][8];
+    private JTextField[] textField = new JTextField[4];
 
-        for (int newButton = 0; newButton < buttonTwo.length; newButton++) {
-            buttonTwo[newButton] = new JButton(Integer.toString(newButton));
-            buttonTwo[newButton].setFocusPainted(false);
-            buttonTwo[newButton].addActionListener(actionListenerNumberTwo);
-            buttonTwo[newButton].setFont(textFont);
-            drawSecondFrame.add(buttonTwo[newButton]);
-        }
+    void drawGridForChess() {
 
-        for (int yellowBackgroundIndex = 0; yellowBackgroundIndex < 8; yellowBackgroundIndex += 2) {
-            button[yellowBackgroundIndex].setBackground(chessYellow());
-            for (int orangeBackgroundIndex = 1; orangeBackgroundIndex < 8; orangeBackgroundIndex += 2) {
-                button[orangeBackgroundIndex].setBackground(chessOrange());
+        JFrame frame = new JFrame("Primordial Chess Game");
+
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                button[x][y] = new JButton();
+                button[x][y].setFocusPainted(false);
+                button[x][y].addActionListener(this);
+                frame.add(button[x][y]);
             }
         }
 
-        drawFrame.setLayout(new GridLayout(8, 8));
-        drawFrame.setLocation(400, 160);
-        drawFrame.setVisible(true);
-        drawFrame.setSize(700, 700);
-        drawFrame.setResizable(false);
-        drawFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        startNewGame();
 
-        drawSecondFrame.setLayout(new GridLayout(8, 8));
-        drawSecondFrame.setLocation(1115, 360);
-        drawSecondFrame.setVisible(true);
-        drawSecondFrame.setSize(500, 500);
-        drawSecondFrame.setResizable(false);
-        drawSecondFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        drawTemporarySecondGUI();
-    }
-
-    private void drawTemporarySecondGUI() {
-        Font buttonFont = new Font("Times New Roman", Font.BOLD, 40);
-
-        for (int newTextfield = 0; newTextfield < temporaryTextfield.length; newTextfield++) {
-            temporaryTextfield[newTextfield] = new JTextField();
-        }
-
-        start.setFont(buttonFont);
-        start.addActionListener(this);
-        start.setFocusPainted(false);
-        drawTemporaryFrame.add(start);
-
-        move.setFont(buttonFont);
-        move.addActionListener(this);
-        move.setFocusPainted(false);
-        drawTemporaryFrame.add(move);
-
-        drawTemporaryFrame.add(temporaryTextfield[0]);
-        drawTemporaryFrame.add(temporaryTextfield[1]);
-
-
-        drawTemporaryFrame.setLayout(new GridLayout(4, 1));
-        drawTemporaryFrame.setLocation(1115, 160);
-        drawTemporaryFrame.setVisible(true);
-        drawTemporaryFrame.setSize(500, 185);
-        drawTemporaryFrame.setResizable(false);
-        drawTemporaryFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    }
-
-    private void drawChessPieces() {
-        for (int drawChess = 0; drawChess < 64; drawChess++) {
-            switch (drawChess) {
-                case 0:
-                case 7:
-                    button[drawChess].setIcon(blackRook);
-                    continue;
-                case 1:
-                case 6:
-                    button[drawChess].setIcon(blackKnight);
-                    continue;
-                case 2:
-                case 5:
-                    button[drawChess].setIcon(blackBishop);
-                    continue;
-                case 3:
-                    button[drawChess].setIcon(blackKing);
-                    continue;
-                case 4:
-                    button[drawChess].setIcon(blackQueen);
-                    continue;
-                case 56:
-                case 63:
-                    button[drawChess].setIcon(whiteRook);
-                    continue;
-                case 57:
-                case 62:
-                    button[drawChess].setIcon(whiteKnight);
-                    continue;
-                case 58:
-                case 61:
-                    button[drawChess].setIcon(whiteBishop);
-                    continue;
-                case 59:
-                    button[drawChess].setIcon(whiteKing);
-                    continue;
-                case 60:
-                    button[drawChess].setIcon(whiteQueen);
-            }
-            if (drawChess == 8) {
-                for (int blackPawns = drawChess; blackPawns < 16; blackPawns++) {
-                    button[blackPawns].setIcon(blackPawn);
-                }
-            } else if (drawChess == 48) {
-                for (int whitePawns = drawChess; whitePawns < 56; whitePawns++) {
-                    button[whitePawns].setIcon(whitePawn);
-                }
-            } else if (drawChess > 15 && drawChess < 48) {
-                button[drawChess].setIcon(null);
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                button[x][y].setBackground(chessOrange());
             }
         }
+
+        for (int x = 0; x < 8; x += 2) {
+            for (int y = 0; y < 8; y += 2) {
+                button[x][y].setBackground(chessYellow());
+            }
+        }
+
+        for (int x = 1; x < 8; x += 2) {
+            for (int y = 1; y < 8; y += 2) {
+                button[x][y].setBackground(chessYellow());
+            }
+        }
+
+        for (int textFieldIndex = 0; textFieldIndex < 4; textFieldIndex++) {
+            textField[textFieldIndex] = new JTextField();
+            textField[textFieldIndex].addActionListener(this);
+        }
+
+        frame.setLayout(new GridLayout(8,8));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600,580);
+        frame.setVisible(true);
     }
+
+    private void startNewGame() {
+
+        for (int x = 0; x < 8; x++) { button[x][1].setIcon(blackPawn); }
+        button[0][0].setIcon(blackRook);
+        button[1][0].setIcon(blackKnight);
+        button[2][0].setIcon(blackBishop);
+        button[3][0].setIcon(blackQueen);
+        button[4][0].setIcon(blackKing);
+        button[5][0].setIcon(blackBishop);
+        button[6][0].setIcon(blackKnight);
+        button[7][0].setIcon(blackRook);
+
+        for (int x = 0; x < 8; x++) { button[x][6].setIcon(whitePawn); }
+        button[0][7].setIcon(whiteRook);
+        button[1][7].setIcon(whiteKnight);
+        button[2][7].setIcon(whiteBishop);
+        button[3][7].setIcon(whiteQueen);
+        button[4][7].setIcon(whiteKing);
+        button[5][7].setIcon(whiteBishop);
+        button[6][7].setIcon(whiteKnight);
+        button[7][7].setIcon(whiteRook);
+    }
+
     private Color chessYellow() {
         return new Color(250, 205, 115);
     }
@@ -165,22 +100,37 @@ class DrawNewFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent eventActionListener) {
 
-        if (eventActionListener.getSource() == start) {
-            drawChessPieces();
-            for (int i = 0; i < 64; i++) {
-                buttonTwo[i].setIcon(button[i].getIcon());
+
+        if (!textField[0].getText().isEmpty()) {
+            for (int x = 0; x < 8; x++) {
+                for (int y = 0; y < 8; y++) {
+                    if (eventActionListener.getSource() == button[x][y]) {
+                        textField[2].setText(Integer.toString(x));
+                        textField[3].setText(Integer.toString(y));
+                    }
+                }
+            }
+        } else {
+            for (int x = 0; x < 8; x++) {
+                for (int y = 0; y < 8; y++) {
+                    if (eventActionListener.getSource() == button[x][y]) {
+                        textField[0].setText(Integer.toString(x));
+                        textField[1].setText(Integer.toString(y));
+                    }
+                }
             }
         }
 
-        if (eventActionListener.getSource() == move && temporaryTextfield[0] != null) {
-            button[Integer.parseInt(temporaryTextfield[1].getText())].setIcon(button[Integer.parseInt(temporaryTextfield[0].getText())].getIcon());
-            button[Integer.parseInt(temporaryTextfield[0].getText())].setIcon(null);
-
-            for (int i = 0; i < 64; i++) {
-                buttonTwo[i].setIcon(button[i].getIcon());
+        if (!(textField[0].getText().isEmpty() && textField[1].getText().isEmpty())) {
+            if (!(textField[2].getText().isEmpty() && textField[3].getText().isEmpty())) {
+                button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].setIcon(button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon());
+                if (button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null) {
+                    button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].setIcon(null);
+                    for (int i = 0; i < 4; i++) {
+                        textField[i].setText(null);
+                    }
+                }
             }
-            temporaryTextfield[0].setText(null);
-            temporaryTextfield[1].setText(null);
         }
     }
 }
