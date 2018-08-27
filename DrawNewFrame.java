@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class drawChessBoard implements ActionListener {
+class DrawChessBoard implements ActionListener {
 
     private ImageIcon blackPawn = new ImageIcon("img/black-pawn.png");
     private ImageIcon blackRook = new ImageIcon("img/black-rook.png");
@@ -25,14 +25,14 @@ class drawChessBoard implements ActionListener {
 
     void drawGridForChess() {
 
-        JFrame frame = new JFrame("Primordial Chess Game");
+        JFrame drawFrame = new JFrame("Primordial Chess Game");
 
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
                 button[x][y] = new JButton();
                 button[x][y].setFocusPainted(false);
                 button[x][y].addActionListener(this);
-                frame.add(button[x][y]);
+                drawFrame.add(button[x][y]);
             }
         }
 
@@ -61,10 +61,11 @@ class drawChessBoard implements ActionListener {
             textField[textFieldIndex].addActionListener(this);
         }
 
-        frame.setLayout(new GridLayout(8,8));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,580);
-        frame.setVisible(true);
+        drawFrame.setLayout(new GridLayout(8,8));
+        drawFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        drawFrame.setSize(800,800);
+        drawFrame.setLocation(560, 140);
+        drawFrame.setVisible(true);
     }
 
     private void startNewGame() {
