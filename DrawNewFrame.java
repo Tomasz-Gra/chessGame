@@ -19,9 +19,10 @@ class DrawChessBoard implements ActionListener {
     private ImageIcon whiteBishop = new ImageIcon("img/white-bishop.png");
     private ImageIcon whiteQueen = new ImageIcon("img/white-queen.png");
     private ImageIcon whiteKing = new ImageIcon("img/white-king.png");
+    //-------------------- ICONS --------------------
 
     private JButton[][] button = new JButton[8][8];
-    private JTextField[] textField = new JTextField[4];
+    private JTextField[] textField = new JTextField[6];
 
     void drawGridForChess() {
 
@@ -37,26 +38,10 @@ class DrawChessBoard implements ActionListener {
         }
 
         startNewGame();
+        setColorsForBoard();
 
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
-                button[x][y].setBackground(chessOrange());
-            }
-        }
 
-        for (int x = 0; x < 8; x += 2) {
-            for (int y = 0; y < 8; y += 2) {
-                button[x][y].setBackground(chessYellow());
-            }
-        }
-
-        for (int x = 1; x < 8; x += 2) {
-            for (int y = 1; y < 8; y += 2) {
-                button[x][y].setBackground(chessYellow());
-            }
-        }
-
-        for (int textFieldIndex = 0; textFieldIndex < 4; textFieldIndex++) {
+        for (int textFieldIndex = 0; textFieldIndex < 6; textFieldIndex++) {
             textField[textFieldIndex] = new JTextField();
             textField[textFieldIndex].addActionListener(this);
         }
@@ -68,6 +53,23 @@ class DrawChessBoard implements ActionListener {
         drawFrame.setVisible(true);
     }
 
+    private void setColorsForBoard() {
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                button[x][y].setBackground(chessOrange());
+            }
+        }
+        for (int x = 0; x < 8; x += 2) {
+            for (int y = 0; y < 8; y += 2) {
+                button[x][y].setBackground(chessYellow());
+            }
+        }
+        for (int x = 1; x < 8; x += 2) {
+            for (int y = 1; y < 8; y += 2) {
+                button[x][y].setBackground(chessYellow());
+            }
+        }
+    }
     private void startNewGame() {
 
         for (int x = 0; x < 8; x++) { button[x][1].setIcon(blackPawn); }
@@ -90,7 +92,6 @@ class DrawChessBoard implements ActionListener {
         button[6][7].setIcon(whiteKnight);
         button[7][7].setIcon(whiteRook);
     }
-
     private Color chessYellow() {
         return new Color(250, 205, 115);
     }
@@ -100,7 +101,6 @@ class DrawChessBoard implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent eventActionListener) {
-
 
         if (!textField[0].getText().isEmpty()) {
             for (int x = 0; x < 8; x++) {
@@ -121,6 +121,8 @@ class DrawChessBoard implements ActionListener {
                 }
             }
         }
+        
+        //-------------------- SET VALUES FOR TEXT FIELDS --------------------
 
         if (!(textField[0].getText().isEmpty() && textField[1].getText().isEmpty())) {
             if (!(textField[2].getText().isEmpty() && textField[3].getText().isEmpty())) {
