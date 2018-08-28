@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class DrawChessBoard implements ActionListener {
+class StartNewGame implements ActionListener {
 
     private ImageIcon bPawn = new ImageIcon("img/black-pawn.png");
     private ImageIcon bRook = new ImageIcon("img/black-rook.png");
@@ -50,14 +50,14 @@ class DrawChessBoard implements ActionListener {
         }
     }
     private void drawChessPieces() {
-        for (int x = 0; x < 8; x++) { buttons[1][x].setIcon(bPawn); }
+        for (int x = 0; x < 8; x++) { buttons[1][x].setIcon(icons[5]); }
         for (int drawIcon = 0; drawIcon < 6; drawIcon++) {
             buttons[0][drawIcon].setIcon(icons[drawIcon]);
             buttons[0][5].setIcon(icons[2]);
             buttons[0][6].setIcon(icons[1]);
             buttons[0][7].setIcon(icons[0]);
         }
-        for (int x = 0; x < 8; x++) { buttons[6][x].setIcon(wPawn); }
+        for (int x = 0; x < 8; x++) { buttons[6][x].setIcon(icons[11]); }
         for (int drawIcon = 6; drawIcon < 11; drawIcon++) {
             buttons[7][drawIcon - 6].setIcon(icons[drawIcon]);
             buttons[7][5].setIcon(icons[8]);
@@ -112,7 +112,7 @@ class DrawChessBoard implements ActionListener {
         if (protectChess[0] || protectChess[1] || protectChess[2] || protectChess[3] || protectChess[4] || protectChess[5]){
             clearTextfields();
         } else {
-            doMove();
+            checkIfCanMove();
         }
     }
     private void protectWhiteChess() {
@@ -123,9 +123,29 @@ class DrawChessBoard implements ActionListener {
         if (protectChess[6] || protectChess[7] || protectChess[8] || protectChess[9] || protectChess[10] || protectChess[11]){
             clearTextfields();
         } else {
+            checkIfCanMove();
+        }
+    }
+
+    private void checkIfCanMove() {
+
+        boolean con1 = ((buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())] == buttons[Integer.parseInt(textField[0].getText()) + 1][Integer.parseInt(textField[1].getText()) + 1]) && (buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null));
+        boolean con2 = ((buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())] == buttons[Integer.parseInt(textField[0].getText()) + 1][Integer.parseInt(textField[1].getText()) - 1]) && (buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null));
+
+        if (buttons[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon() == icons[5]) {
+            if (con1 || con2) {
+                doMove();
+            } else if ((buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())] != buttons[Integer.parseInt(textField[0].getText()) + 1][Integer.parseInt(textField[1].getText())])
+                        || (buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null)) {
+                    clearTextfields();
+            } else {
+                doMove();
+                }
+        } else {
             doMove();
         }
     }
+
     private void doMove() {
         buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].setIcon(buttons[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon());
         if (buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null) {
