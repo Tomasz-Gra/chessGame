@@ -7,41 +7,162 @@ import java.awt.event.ActionListener;
 
 class DrawChessBoard implements ActionListener {
 
-    private ImageIcon blackPawn = new ImageIcon("img/black-pawn.png");
-    private ImageIcon blackRook = new ImageIcon("img/black-rook.png");
-    private ImageIcon blackKnight = new ImageIcon("img/black-knight.png");
-    private ImageIcon blackBishop = new ImageIcon("img/black-bishop.png");
-    private ImageIcon blackQueen = new ImageIcon("img/black-queen.png");
-    private ImageIcon blackKing = new ImageIcon("img/black-king.png");
-    private ImageIcon whitePawn = new ImageIcon("img/white-pawn.png");
-    private ImageIcon whiteRook = new ImageIcon("img/white-rook.png");
-    private ImageIcon whiteKnight = new ImageIcon("img/white-knight.png");
-    private ImageIcon whiteBishop = new ImageIcon("img/white-bishop.png");
-    private ImageIcon whiteQueen = new ImageIcon("img/white-queen.png");
-    private ImageIcon whiteKing = new ImageIcon("img/white-king.png");
+    private ImageIcon bPawn = new ImageIcon("img/black-pawn.png");
+    private ImageIcon bRook = new ImageIcon("img/black-rook.png");
+    private ImageIcon bKnight = new ImageIcon("img/black-knight.png");
+    private ImageIcon bBishop = new ImageIcon("img/black-bishop.png");
+    private ImageIcon bQueen = new ImageIcon("img/black-queen.png");
+    private ImageIcon bKing = new ImageIcon("img/black-king.png");
+    private ImageIcon wPawn = new ImageIcon("img/white-pawn.png");
+    private ImageIcon wRook = new ImageIcon("img/white-rook.png");
+    private ImageIcon wKnight = new ImageIcon("img/white-knight.png");
+    private ImageIcon wBishop = new ImageIcon("img/white-bishop.png");
+    private ImageIcon wQueen = new ImageIcon("img/white-queen.png");
+    private ImageIcon wKing = new ImageIcon("img/white-king.png");
     //-------------------- ICONS --------------------
 
-    private ImageIcon[] icons = {blackPawn, blackRook, blackKnight, blackBishop, blackQueen, blackKing, whitePawn, whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing};
-    private JButton[][] button = new JButton[8][8];
+    private ImageIcon[] icons = {bPawn, bRook, bKnight, bBishop, bQueen, bKing, wPawn, wRook, wKnight, wBishop, wQueen, wKing};
+    private JButton[][] buttons = new JButton[8][8];
     private JTextField[] textField = new JTextField[6];
     private boolean[] protectChess = new boolean[12];
 
-    void drawGridForChess() {
+    private Color colorFieldYellow() {
+        return new Color(250, 205, 115);
+    }
+    private Color colorFieldOrange() {
+        return new Color(180, 120, 0);
+    }
+    private void setColorsForBoard() {
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                buttons[x][y].setBackground(colorFieldOrange());
+            }
+        }
+        for (int x = 0; x < 8; x += 2) {
+            for (int y = 0; y < 8; y += 2) {
+                buttons[x][y].setBackground(colorFieldYellow());
+            }
+        }
+        for (int x = 1; x < 8; x += 2) {
+            for (int y = 1; y < 8; y += 2) {
+                buttons[x][y].setBackground(colorFieldYellow());
+            }
+        }
+    }
+    private void drawChessPieces() {
+        for (int x = 0; x < 8; x++) {
+            buttons[1][x].setIcon(bPawn);
+        }
+        buttons[0][0].setIcon(bRook);
+        buttons[0][1].setIcon(bKnight);
+        buttons[0][2].setIcon(bBishop);
+        buttons[0][3].setIcon(bQueen);
+        buttons[0][4].setIcon(bKing);
+        buttons[0][5].setIcon(bBishop);
+        buttons[0][6].setIcon(bKnight);
+        buttons[0][7].setIcon(bRook);
+
+        for (int x = 0; x < 8; x++) {
+            buttons[6][x].setIcon(wPawn);
+        }
+        buttons[7][0].setIcon(wRook);
+        buttons[7][1].setIcon(wKnight);
+        buttons[7][2].setIcon(wBishop);
+        buttons[7][3].setIcon(wQueen);
+        buttons[7][4].setIcon(wKing);
+        buttons[7][5].setIcon(wBishop);
+        buttons[7][6].setIcon(wKnight);
+        buttons[7][7].setIcon(wRook);
+    }
+    private void setValuesForController(ActionEvent eventActionListener) {
+        if (!textField[0].getText().isEmpty()) {
+            for (int x = 0; x < buttons.length; x++) {
+                for (int y = 0; y < buttons.length; y++) {
+                    if (eventActionListener.getSource() == buttons[x][y]) {
+                        textField[2].setText(Integer.toString(x));
+                        textField[3].setText(Integer.toString(y));
+                    }
+                }
+            }
+        } else {
+            for (int x = 0; x < buttons.length; x++) {
+                for (int y = 0; y < buttons.length; y++) {
+                    if (eventActionListener.getSource() == buttons[x][y]) {
+                        textField[0].setText(Integer.toString(x));
+                        textField[1].setText(Integer.toString(y));
+                    }
+                }
+            }
+        }
+    }
+
+    private void protectOrMove() {
+        for (int protectPiece = 0; protectPiece < 12; protectPiece++) {
+            protectChess[protectPiece] = buttons[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon() == icons[protectPiece];
+        }
+
+        if (!(textField[0].getText().isEmpty() && textField[1].getText().isEmpty())) {
+            if (!(textField[2].getText().isEmpty() && textField[3].getText().isEmpty())) {
+                if (protectChess[0] || protectChess[1] || protectChess[2] || protectChess[3] || protectChess[4] || protectChess[5]) {
+                    protectBlackChess();
+                } else if (protectChess[6] || protectChess[7] || protectChess[8] || protectChess[9] || protectChess[10] || protectChess[11]) {
+                    protectWhiteChess();
+                } else if (buttons[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon() == null) {
+                    clearTextfields();
+                }
+            }
+        }
+    }
+    private void protectBlackChess() {
+
+        for (int protectBlackPiece = 0; protectBlackPiece < 12; protectBlackPiece++) {
+            protectChess[protectBlackPiece] = buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() == icons[protectBlackPiece];
+        }
+        if (protectChess[0] || protectChess[1] || protectChess[2] || protectChess[3] || protectChess[4] || protectChess[5]){
+            clearTextfields();
+        } else {
+            doMove();
+        }
+    }
+    private void protectWhiteChess() {
+
+        for (int protectWhitePiece = 6; protectWhitePiece < 12; protectWhitePiece++) {
+            protectChess[protectWhitePiece] = buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() == icons[protectWhitePiece];
+        }
+        if (protectChess[6] || protectChess[7] || protectChess[8] || protectChess[9] || protectChess[10] || protectChess[11]){
+            clearTextfields();
+        } else {
+            doMove();
+        }
+    }
+    private void doMove() {
+        buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].setIcon(buttons[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon());
+        if (buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null) {
+            buttons[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].setIcon(null);
+            clearTextfields();
+        }
+    }
+    private void clearTextfields() {
+        for (int i = 0; i < 4; i++) {
+            textField[i].setText(null);
+        }
+    }
+
+    void startNewGame() {
         JFrame drawFrame = new JFrame("Primordial Chess Game");
         JFrame drawSecondFrame = new JFrame();
 
-        for (int x = 0; x < button.length; x++) {
-            for (int y = 0; y < button.length; y++) {
-                button[x][y] = new JButton();
-                button[x][y].setFocusPainted(false);
-                button[x][y].addActionListener(this);
-                drawFrame.add(button[x][y]);
+        for (int x = 0; x < buttons.length; x++) {
+            for (int y = 0; y < buttons.length; y++) {
+                buttons[x][y] = new JButton();
+                buttons[x][y].setFocusPainted(false);
+                buttons[x][y].addActionListener(this);
+                drawFrame.add(buttons[x][y]);
             }
         }
 
-        startNewGame();
+        drawChessPieces();
         setColorsForBoard();
-
 
         for (int textFieldIndex = 0; textFieldIndex < textField.length; textFieldIndex++) {
             textField[textFieldIndex] = new JTextField();
@@ -62,130 +183,9 @@ class DrawChessBoard implements ActionListener {
         drawSecondFrame.setVisible(true);
 
     }
-    private void setColorsForBoard() {
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
-                button[x][y].setBackground(chessOrange());
-            }
-        }
-        for (int x = 0; x < 8; x += 2) {
-            for (int y = 0; y < 8; y += 2) {
-                button[x][y].setBackground(chessYellow());
-            }
-        }
-        for (int x = 1; x < 8; x += 2) {
-            for (int y = 1; y < 8; y += 2) {
-                button[x][y].setBackground(chessYellow());
-            }
-        }
-    }
-    private void startNewGame() {
-        for (int x = 0; x < 8; x++) {
-            button[1][x].setIcon(blackPawn);
-        }
-        button[0][0].setIcon(blackRook);
-        button[0][1].setIcon(blackKnight);
-        button[0][2].setIcon(blackBishop);
-        button[0][3].setIcon(blackQueen);
-        button[0][4].setIcon(blackKing);
-        button[0][5].setIcon(blackBishop);
-        button[0][6].setIcon(blackKnight);
-        button[0][7].setIcon(blackRook);
 
-        for (int x = 0; x < 8; x++) {
-            button[6][x].setIcon(whitePawn);
-        }
-        button[7][0].setIcon(whiteRook);
-        button[7][1].setIcon(whiteKnight);
-        button[7][2].setIcon(whiteBishop);
-        button[7][3].setIcon(whiteQueen);
-        button[7][4].setIcon(whiteKing);
-        button[7][5].setIcon(whiteBishop);
-        button[7][6].setIcon(whiteKnight);
-        button[7][7].setIcon(whiteRook);
-    }
-    private Color chessYellow() {
-        return new Color(250, 205, 115);
-    }
-    private Color chessOrange() {
-        return new Color(180, 120, 0);
-    }
-
-    @Override
     public void actionPerformed(ActionEvent eventActionListener) {
-        if (!textField[0].getText().isEmpty()) {
-            for (int x = 0; x < button.length; x++) {
-                for (int y = 0; y < button.length; y++) {
-                    if (eventActionListener.getSource() == button[x][y]) {
-                        textField[2].setText(Integer.toString(x));
-                        textField[3].setText(Integer.toString(y));
-                    }
-                }
-            }
-        } else {
-            for (int x = 0; x < button.length; x++) {
-                for (int y = 0; y < button.length; y++) {
-                    if (eventActionListener.getSource() == button[x][y]) {
-                        textField[0].setText(Integer.toString(x));
-                        textField[1].setText(Integer.toString(y));
-                    }
-                }
-            }
-        }
-
-        //-------------------- SET VALUES FOR TEXT FIELDS --------------------
-
-        for (int protectBlackPiece = 0; protectBlackPiece < 12; protectBlackPiece++) {
-            protectChess[protectBlackPiece] = button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon() == icons[protectBlackPiece];
-        }
-
-        if (!(textField[0].getText().isEmpty() && textField[1].getText().isEmpty())) {
-            if (!(textField[2].getText().isEmpty() && textField[3].getText().isEmpty())) {
-                if (protectChess[0] || protectChess[1] || protectChess[2] || protectChess[3] || protectChess[4] || protectChess[5]) {
-                    protectBlackChess();
-                } else if (protectChess[6] || protectChess[7] || protectChess[8] || protectChess[9] || protectChess[10] || protectChess[11]) {
-                    protectWhiteChess();
-                } else if (button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon() == null) {
-                    clearTextfields();
-                }
-            }
-        }
-    }
-
-    private void protectBlackChess() {
-
-        for (int protectBlackPiece = 0; protectBlackPiece < 12; protectBlackPiece++) {
-            protectChess[protectBlackPiece] = button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() == icons[protectBlackPiece];
-        }
-        if (protectChess[0] || protectChess[1] || protectChess[2] || protectChess[3] || protectChess[4] || protectChess[5]){
-            clearTextfields();
-        } else {
-            doMove();
-        }
-    }
-
-    private void protectWhiteChess() {
-
-        for (int protectWhitePiece = 6; protectWhitePiece < 12; protectWhitePiece++) {
-            protectChess[protectWhitePiece] = button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() == icons[protectWhitePiece];
-        }
-        if (protectChess[6] || protectChess[7] || protectChess[8] || protectChess[9] || protectChess[10] || protectChess[11]){
-            clearTextfields();
-        } else {
-            doMove();
-        }
-    }
-
-    private void doMove() {
-        button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].setIcon(button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon());
-        if (button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null) {
-            button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].setIcon(null);
-            clearTextfields();
-        }
-    }
-    private void clearTextfields() {
-        for (int i = 0; i < 4; i++) {
-            textField[i].setText(null);
-        }
+        setValuesForController(eventActionListener);
+        protectOrMove();
     }
 }
