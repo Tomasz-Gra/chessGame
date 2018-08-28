@@ -65,7 +65,6 @@ class DrawChessBoard implements ActionListener {
         drawSecondFrame.setVisible(true);
 
     }
-
     private void setColorsForBoard() {
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
@@ -83,7 +82,6 @@ class DrawChessBoard implements ActionListener {
             }
         }
     }
-
     private void startNewGame() {
         for (int x = 0; x < 8; x++) {
             button[1][x].setIcon(blackPawn);
@@ -109,11 +107,9 @@ class DrawChessBoard implements ActionListener {
         button[7][6].setIcon(whiteKnight);
         button[7][7].setIcon(whiteRook);
     }
-
     private Color chessYellow() {
         return new Color(250, 205, 115);
     }
-
     private Color chessOrange() {
         return new Color(180, 120, 0);
     }
@@ -153,13 +149,11 @@ class DrawChessBoard implements ActionListener {
         if (!(textField[0].getText().isEmpty() && textField[1].getText().isEmpty())) {
             if (!(textField[2].getText().isEmpty() && textField[3].getText().isEmpty())) {
                 if (protectBlackChessBoolean[0] || protectBlackChessBoolean[1] || protectBlackChessBoolean[2] || protectBlackChessBoolean[3] || protectBlackChessBoolean[4] || protectBlackChessBoolean[5]) {
-                            protectBlackChess();
+                    protectBlackChess();
                 } else if (protectWhiteChessBoolean[0] || protectWhiteChessBoolean[1] || protectWhiteChessBoolean[2] || protectWhiteChessBoolean[3] || protectWhiteChessBoolean[4] || protectWhiteChessBoolean[5]) {
-                            protectWhiteChess();
+                    protectWhiteChess();
                 } else if (button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon() == null) {
-                    for (int i = 0; i < 4; i++) {
-                        textField[i].setText(null);
-                    }
+                    clearTextfields();
                 }
             }
         }
@@ -172,9 +166,7 @@ class DrawChessBoard implements ActionListener {
         }
 
         if (protectBlackChessBoolean[0] || protectBlackChessBoolean[1] || protectBlackChessBoolean[2] || protectBlackChessBoolean[3] || protectBlackChessBoolean[4] || protectBlackChessBoolean[5]){
-            for (int i = 0; i < 4; i++) {
-                textField[i].setText(null);
-            }
+            clearTextfields();
         } else {
             doMove();
         }
@@ -187,9 +179,7 @@ class DrawChessBoard implements ActionListener {
         }
 
         if (protectWhiteChessBoolean[0] || protectWhiteChessBoolean[1] || protectWhiteChessBoolean[2] || protectWhiteChessBoolean[3] || protectWhiteChessBoolean[4] || protectWhiteChessBoolean[5]){
-            for (int i = 0; i < 4; i++) {
-                textField[i].setText(null);
-            }
+            clearTextfields();
         } else {
             doMove();
         }
@@ -199,9 +189,12 @@ class DrawChessBoard implements ActionListener {
         button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].setIcon(button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon());
         if (button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null) {
             button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].setIcon(null);
-            for (int i = 0; i < 4; i++) {
-                textField[i].setText(null);
-            }
+            clearTextfields();
+        }
+    }
+    private void clearTextfields() {
+        for (int i = 0; i < 4; i++) {
+            textField[i].setText(null);
         }
     }
 }
