@@ -23,9 +23,8 @@ class StartNewGame implements ActionListener {
 
     private ImageIcon[] icons = {bRook, bKnight, bBishop, bQueen, bKing, bPawn, wRook, wKnight, wBishop, wQueen, wKing, wPawn};
     private JButton[][] buttons = new JButton[8][8];
-    JTextField[] textField = new JTextField[6];
+    private JTextField[] textField = new JTextField[6];
     private boolean[] protectChess = new boolean[12];
-
 
 
 
@@ -115,7 +114,7 @@ class StartNewGame implements ActionListener {
         if (protectChess[0] || protectChess[1] || protectChess[2] || protectChess[3] || protectChess[4] || protectChess[5]){
             clearTextfields();
         } else {
-            checkIfCanMove();
+            checkIfICanMove();
         }
     }
     private void protectWhiteChess() {
@@ -126,12 +125,11 @@ class StartNewGame implements ActionListener {
         if (protectChess[6] || protectChess[7] || protectChess[8] || protectChess[9] || protectChess[10] || protectChess[11]){
             clearTextfields();
         } else {
-            checkIfCanMove();
+            checkIfICanMove();
         }
     }
 
-
-    private void checkIfCanMove() {
+    private void checkIfICanMove() {
         int fieldZero = Integer.parseInt(textField[0].getText());
         int fieldOne = Integer.parseInt(textField[1].getText());
         int fieldTwo = Integer.parseInt(textField[2].getText());
@@ -144,14 +142,12 @@ class StartNewGame implements ActionListener {
             if (con1 || con2) {
                 doMove();
             } else if ((buttons[fieldTwo][fieldThree] != buttons[fieldZero + 1][fieldOne])
-                        || (buttons[fieldTwo][fieldThree].getIcon() != null)) {
-                    clearTextfields();
+                    || (buttons[fieldTwo][fieldThree].getIcon() != null)) {
+                clearTextfields();
             } else {
                 doMove();
-                }
-        } else {
-            doMove();
-        }
+            }
+        } 
     }
 
     private void doMove() {
@@ -171,7 +167,6 @@ class StartNewGame implements ActionListener {
             textField[i].setText(null);
         }
     }
-
     void startNewGame() {
         JFrame drawFrame = new JFrame("Primordial Chess Game");
         JFrame drawSecondFrame = new JFrame();
@@ -207,7 +202,6 @@ class StartNewGame implements ActionListener {
         drawSecondFrame.setVisible(true);
 
     }
-
     public void actionPerformed(ActionEvent eventActionListener) {
         setValuesForController(eventActionListener);
         protectOrMove();
