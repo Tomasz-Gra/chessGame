@@ -21,8 +21,13 @@ class DrawChessBoard implements ActionListener {
     private ImageIcon whiteKing = new ImageIcon("img/white-king.png");
     //-------------------- ICONS --------------------
 
+    private ImageIcon[] blackIcons = {blackPawn, blackRook, blackKnight, blackBishop, blackQueen, blackKing};
+    private ImageIcon[] whiteIcons = {whitePawn, whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing};
+
     private JButton[][] button = new JButton[8][8];
-    private JTextField[] textField = new JTextField[4];
+    private JTextField[] textField = new JTextField[6];
+    private boolean[] protectBlackChessBoolean = new boolean[6];
+    private boolean[] protectWhiteChessBoolean = new boolean[6];
 
     void drawGridForChess() {
         JFrame drawFrame = new JFrame("Primordial Chess Game");
@@ -137,15 +142,65 @@ class DrawChessBoard implements ActionListener {
 
         //-------------------- SET VALUES FOR TEXT FIELDS --------------------
 
+        for (int protectBlackPiece = 0; protectBlackPiece < 6; protectBlackPiece++) {
+            protectBlackChessBoolean[protectBlackPiece] = button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon() == blackIcons[protectBlackPiece];
+        }
+        for (int protectWhitePiece = 0; protectWhitePiece < 6; protectWhitePiece++) {
+            protectWhiteChessBoolean[protectWhitePiece] = button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon() == whiteIcons[protectWhitePiece];
+        }
+
+
         if (!(textField[0].getText().isEmpty() && textField[1].getText().isEmpty())) {
             if (!(textField[2].getText().isEmpty() && textField[3].getText().isEmpty())) {
-                button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].setIcon(button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon());
-                if (button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null) {
-                    button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].setIcon(null);
+                if (protectBlackChessBoolean[0] || protectBlackChessBoolean[1] || protectBlackChessBoolean[2] || protectBlackChessBoolean[3] || protectBlackChessBoolean[4] || protectBlackChessBoolean[5]) {
+                            protectBlackChess();
+                } else if (protectWhiteChessBoolean[0] || protectWhiteChessBoolean[1] || protectWhiteChessBoolean[2] || protectWhiteChessBoolean[3] || protectWhiteChessBoolean[4] || protectWhiteChessBoolean[5]) {
+                            protectWhiteChess();
+                } else if (button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon() == null) {
                     for (int i = 0; i < 4; i++) {
                         textField[i].setText(null);
                     }
                 }
+            }
+        }
+    }
+
+    private void protectBlackChess() {
+
+        for (int protectBlackPiece = 0; protectBlackPiece < 6; protectBlackPiece++) {
+            protectBlackChessBoolean[protectBlackPiece] = button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() == blackIcons[protectBlackPiece];
+        }
+
+        if (protectBlackChessBoolean[0] || protectBlackChessBoolean[1] || protectBlackChessBoolean[2] || protectBlackChessBoolean[3] || protectBlackChessBoolean[4] || protectBlackChessBoolean[5]){
+            for (int i = 0; i < 4; i++) {
+                textField[i].setText(null);
+            }
+        } else {
+            doMove();
+        }
+    }
+
+    private void protectWhiteChess() {
+
+        for (int protectWhitePiece = 0; protectWhitePiece < 6; protectWhitePiece++) {
+            protectWhiteChessBoolean[protectWhitePiece] = button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() == whiteIcons[protectWhitePiece];
+        }
+
+        if (protectWhiteChessBoolean[0] || protectWhiteChessBoolean[1] || protectWhiteChessBoolean[2] || protectWhiteChessBoolean[3] || protectWhiteChessBoolean[4] || protectWhiteChessBoolean[5]){
+            for (int i = 0; i < 4; i++) {
+                textField[i].setText(null);
+            }
+        } else {
+            doMove();
+        }
+    }
+
+    private void doMove() {
+        button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].setIcon(button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon());
+        if (button[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null) {
+            button[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].setIcon(null);
+            for (int i = 0; i < 4; i++) {
+                textField[i].setText(null);
             }
         }
     }
