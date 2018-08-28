@@ -21,7 +21,7 @@ class DrawChessBoard implements ActionListener {
     private ImageIcon wKing = new ImageIcon("img/white-king.png");
     //-------------------- ICONS --------------------
 
-    private ImageIcon[] icons = {bPawn, bRook, bKnight, bBishop, bQueen, bKing, wPawn, wRook, wKnight, wBishop, wQueen, wKing};
+    private ImageIcon[] icons = {bRook, bKnight, bBishop, bQueen, bKing, bPawn, wRook, wKnight, wBishop, wQueen, wKing, wPawn};
     private JButton[][] buttons = new JButton[8][8];
     private JTextField[] textField = new JTextField[6];
     private boolean[] protectChess = new boolean[12];
@@ -50,29 +50,20 @@ class DrawChessBoard implements ActionListener {
         }
     }
     private void drawChessPieces() {
-        for (int x = 0; x < 8; x++) {
-            buttons[1][x].setIcon(bPawn);
+        for (int x = 0; x < 8; x++) { buttons[1][x].setIcon(bPawn); }
+        for (int drawIcon = 0; drawIcon < 6; drawIcon++) {
+            buttons[0][drawIcon].setIcon(icons[drawIcon]);
+            buttons[0][5].setIcon(icons[2]);
+            buttons[0][6].setIcon(icons[1]);
+            buttons[0][7].setIcon(icons[0]);
         }
-        buttons[0][0].setIcon(bRook);
-        buttons[0][1].setIcon(bKnight);
-        buttons[0][2].setIcon(bBishop);
-        buttons[0][3].setIcon(bQueen);
-        buttons[0][4].setIcon(bKing);
-        buttons[0][5].setIcon(bBishop);
-        buttons[0][6].setIcon(bKnight);
-        buttons[0][7].setIcon(bRook);
-
-        for (int x = 0; x < 8; x++) {
-            buttons[6][x].setIcon(wPawn);
+        for (int x = 0; x < 8; x++) { buttons[6][x].setIcon(wPawn); }
+        for (int drawIcon = 6; drawIcon < 11; drawIcon++) {
+            buttons[7][drawIcon - 6].setIcon(icons[drawIcon]);
+            buttons[7][5].setIcon(icons[8]);
+            buttons[7][6].setIcon(icons[7]);
+            buttons[7][7].setIcon(icons[6]);
         }
-        buttons[7][0].setIcon(wRook);
-        buttons[7][1].setIcon(wKnight);
-        buttons[7][2].setIcon(wBishop);
-        buttons[7][3].setIcon(wQueen);
-        buttons[7][4].setIcon(wKing);
-        buttons[7][5].setIcon(wBishop);
-        buttons[7][6].setIcon(wKnight);
-        buttons[7][7].setIcon(wRook);
     }
     private void setValuesForController(ActionEvent eventActionListener) {
         if (!textField[0].getText().isEmpty()) {
