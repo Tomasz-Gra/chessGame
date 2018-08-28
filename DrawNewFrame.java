@@ -23,8 +23,11 @@ class StartNewGame implements ActionListener {
 
     private ImageIcon[] icons = {bRook, bKnight, bBishop, bQueen, bKing, bPawn, wRook, wKnight, wBishop, wQueen, wKing, wPawn};
     private JButton[][] buttons = new JButton[8][8];
-    private JTextField[] textField = new JTextField[6];
+    JTextField[] textField = new JTextField[6];
     private boolean[] protectChess = new boolean[12];
+
+
+
 
     private Color colorFieldYellow() {
         return new Color(250, 205, 115);
@@ -127,16 +130,21 @@ class StartNewGame implements ActionListener {
         }
     }
 
+
     private void checkIfCanMove() {
+        int fieldZero = Integer.parseInt(textField[0].getText());
+        int fieldOne = Integer.parseInt(textField[1].getText());
+        int fieldTwo = Integer.parseInt(textField[2].getText());
+        int fieldThree = Integer.parseInt(textField[3].getText());
 
-        boolean con1 = ((buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())] == buttons[Integer.parseInt(textField[0].getText()) + 1][Integer.parseInt(textField[1].getText()) + 1]) && (buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null));
-        boolean con2 = ((buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())] == buttons[Integer.parseInt(textField[0].getText()) + 1][Integer.parseInt(textField[1].getText()) - 1]) && (buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null));
+        boolean con1 = ((buttons[fieldTwo][fieldThree] == buttons[fieldZero + 1][fieldOne + 1]) && (buttons[fieldTwo][fieldThree].getIcon() != null));
+        boolean con2 = ((buttons[fieldTwo][fieldThree] == buttons[fieldZero + 1][fieldOne - 1]) && (buttons[fieldTwo][fieldThree].getIcon() != null));
 
-        if (buttons[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon() == icons[5]) {
+        if (buttons[fieldZero][fieldOne].getIcon() == icons[5]) {
             if (con1 || con2) {
                 doMove();
-            } else if ((buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())] != buttons[Integer.parseInt(textField[0].getText()) + 1][Integer.parseInt(textField[1].getText())])
-                        || (buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null)) {
+            } else if ((buttons[fieldTwo][fieldThree] != buttons[fieldZero + 1][fieldOne])
+                        || (buttons[fieldTwo][fieldThree].getIcon() != null)) {
                     clearTextfields();
             } else {
                 doMove();
@@ -147,9 +155,14 @@ class StartNewGame implements ActionListener {
     }
 
     private void doMove() {
-        buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].setIcon(buttons[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon());
-        if (buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() != null) {
-            buttons[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].setIcon(null);
+        int fieldZero = Integer.parseInt(textField[0].getText());
+        int fieldOne = Integer.parseInt(textField[1].getText());
+        int fieldTwo = Integer.parseInt(textField[2].getText());
+        int fieldThree = Integer.parseInt(textField[3].getText());
+
+        buttons[fieldTwo][fieldThree].setIcon(buttons[fieldZero][fieldOne].getIcon());
+        if (buttons[fieldTwo][fieldThree].getIcon() != null) {
+            buttons[fieldZero][fieldOne].setIcon(null);
             clearTextfields();
         }
     }
