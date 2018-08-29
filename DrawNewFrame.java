@@ -31,12 +31,8 @@ class StartNewGame implements ActionListener {
     private int fieldTwo() { return Integer.parseInt(textField[2].getText()); }
     private int fieldThree() { return Integer.parseInt(textField[3].getText()); }
     private boolean iconIsNull() { return buttons[fieldTwo()][fieldThree()].getIcon() == null; }
-    private Color colorFieldYellow() {
-        return new Color(250, 205, 115);
-    }
-    private Color colorFieldOrange() {
-        return new Color(180, 120, 0);
-    }
+    private Color colorFieldYellow() { return new Color(250, 205, 115); }
+    private Color colorFieldOrange() { return new Color(180, 120, 0); }
 
     private void setColorsForBoard() {
         for (int x = 2; x < 10; x++) {
@@ -179,7 +175,7 @@ class StartNewGame implements ActionListener {
         }
     }
 
-    private void moveKnight() { ;
+    private void moveKnight() {
         boolean firstMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 2][fieldOne() + 1]);
         boolean secondMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 2][fieldOne() - 1]);
         boolean thirdMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 2][fieldOne() + 1]);
@@ -188,29 +184,22 @@ class StartNewGame implements ActionListener {
         boolean sixthMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 1][fieldOne() - 2]);
         boolean seventhMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 1][fieldOne() + 2]);
         boolean eightMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 1][fieldOne() - 2]);
+        
+        boolean[] booleans = {firstMove, secondMove, thirdMove, fourthMove, fifthMove, sixthMove, seventhMove, eightMove};
+        boolean[] bIconIsNull = new boolean[8];
+        boolean[] bIconIsNotNull = new boolean[8];
 
-        boolean SE = (firstMove && iconIsNull());
-        boolean SW = (secondMove && iconIsNull());
-        boolean NE = (thirdMove && iconIsNull());
-        boolean NW = (fourthMove && iconIsNull());
-        boolean SEE = (fifthMove && iconIsNull());
-        boolean SWW = (sixthMove && iconIsNull());
-        boolean NEE = (seventhMove && iconIsNull());
-        boolean NWW = (eightMove && iconIsNull());
+        for (int i = 0; i < booleans.length; i++) {
+            bIconIsNull[i] = booleans[i] && iconIsNull();
+        }
 
-        boolean SE_2 = (firstMove && !iconIsNull());
-        boolean SW_2 = (secondMove && !iconIsNull());
-        boolean NE_2 = (thirdMove && !iconIsNull());
-        boolean NW_2 = (fourthMove && !iconIsNull());
-        boolean SEE_2 = (fifthMove && !iconIsNull());
-        boolean SWW_2 = (sixthMove && !iconIsNull());
-        boolean NEE_2 = (seventhMove && !iconIsNull());
-        boolean NWW_2 = (eightMove && !iconIsNull());
-
-
-        if (SE || SW || NE || NW || SEE || SWW || NEE || NWW) {
+        for (int i = 0; i < booleans.length; i++) {
+            bIconIsNotNull[i] = booleans[i] && !iconIsNull();
+        }
+        
+        if (bIconIsNull[0] || bIconIsNull[1] || bIconIsNull[2] || bIconIsNull[3] || bIconIsNull[4] || bIconIsNull[5] || bIconIsNull[6] || bIconIsNull[7]) {
             doMove();
-        } else if (SE_2 || SW_2 || NE_2 || NW_2 || SEE_2 || SWW_2 || NEE_2 || NWW_2) {
+        } else if (bIconIsNotNull[0] || bIconIsNotNull[1] || bIconIsNotNull[2] || bIconIsNotNull[3] || bIconIsNotNull[4] || bIconIsNotNull[5] || bIconIsNotNull[6] || bIconIsNotNull[7]) {
             doMove();
         } else {
             clearTextfields();
@@ -257,7 +246,6 @@ class StartNewGame implements ActionListener {
     }
     void startNewGame() {
         JFrame drawFrame = new JFrame("Primordial Chess Game");
-        JFrame drawSecondFrame = new JFrame();
 
         for (int x = 0; x < buttons.length; x++) {
             for (int y = 0; y < buttons.length; y++) {
@@ -276,7 +264,6 @@ class StartNewGame implements ActionListener {
         for (int textFieldIndex = 0; textFieldIndex < textField.length; textFieldIndex++) {
             textField[textFieldIndex] = new JTextField();
             textField[textFieldIndex].addActionListener(this);
-            drawSecondFrame.add(textField[textFieldIndex]);
         }
 
         drawFrame.setLayout(new GridLayout(12, 12));
@@ -284,12 +271,6 @@ class StartNewGame implements ActionListener {
         drawFrame.setSize(800, 800);
         drawFrame.setLocation(560, 140);
         drawFrame.setVisible(true);
-
-        drawSecondFrame.setLayout(new GridLayout(8, 8));
-        drawSecondFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        drawSecondFrame.setSize(400, 400);
-        drawSecondFrame.setLocation(1420, 140);
-        drawSecondFrame.setVisible(true);
 
     }
     public void actionPerformed(ActionEvent eventActionListener) {
