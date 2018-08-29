@@ -22,49 +22,61 @@ class StartNewGame implements ActionListener {
     //-------------------- ICONS --------------------
 
     private ImageIcon[] icons = {bRook, bKnight, bBishop, bQueen, bKing, bPawn, wRook, wKnight, wBishop, wQueen, wKing, wPawn};
-    private JButton[][] buttons = new JButton[8][8];
+    private JButton[][] buttons = new JButton[12][12];
     private JTextField[] textField = new JTextField[6];
     private boolean[] protectChess = new boolean[12];
 
-
-
+    private int fieldZero() { return Integer.parseInt(textField[0].getText()); }
+    private int fieldOne() { return Integer.parseInt(textField[1].getText()); }
+    private int fieldTwo() { return Integer.parseInt(textField[2].getText()); }
+    private int fieldThree() { return Integer.parseInt(textField[3].getText()); }
+    private boolean iconIsNull() { return buttons[fieldTwo()][fieldThree()].getIcon() == null; }
     private Color colorFieldYellow() {
         return new Color(250, 205, 115);
     }
     private Color colorFieldOrange() {
         return new Color(180, 120, 0);
     }
+
     private void setColorsForBoard() {
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
+        for (int x = 2; x < 10; x++) {
+            for (int y = 2; y < 10; y++) {
                 buttons[x][y].setBackground(colorFieldOrange());
             }
         }
-        for (int x = 0; x < 8; x += 2) {
-            for (int y = 0; y < 8; y += 2) {
+        for (int x = 2; x < 10; x += 2) {
+            for (int y = 2; y < 10; y += 2) {
                 buttons[x][y].setBackground(colorFieldYellow());
             }
         }
-        for (int x = 1; x < 8; x += 2) {
-            for (int y = 1; y < 8; y += 2) {
+        for (int x = 3; x < 11; x += 2) {
+            for (int y = 3; y < 11; y += 2) {
                 buttons[x][y].setBackground(colorFieldYellow());
             }
         }
     }
     private void drawChessPieces() {
-        for (int x = 0; x < 8; x++) { buttons[1][x].setIcon(icons[5]); }
+        for (int x = 2; x < 10; x++) { buttons[3][x].setIcon(icons[5]); }
         for (int drawIcon = 0; drawIcon < 6; drawIcon++) {
-            buttons[0][drawIcon].setIcon(icons[drawIcon]);
-            buttons[0][5].setIcon(icons[2]);
-            buttons[0][6].setIcon(icons[1]);
-            buttons[0][7].setIcon(icons[0]);
+            buttons[2][2].setIcon(icons[0]);
+            buttons[2][3].setIcon(icons[1]);
+            buttons[2][4].setIcon(icons[2]);
+            buttons[2][5].setIcon(icons[3]);
+            buttons[2][6].setIcon(icons[4]);
+            buttons[2][7].setIcon(icons[2]);
+            buttons[2][8].setIcon(icons[1]);
+            buttons[2][9].setIcon(icons[0]);
         }
-        for (int x = 0; x < 8; x++) { buttons[6][x].setIcon(icons[11]); }
+        for (int x = 2; x < 10; x++) { buttons[8][x].setIcon(icons[11]); }
         for (int drawIcon = 6; drawIcon < 11; drawIcon++) {
-            buttons[7][drawIcon - 6].setIcon(icons[drawIcon]);
-            buttons[7][5].setIcon(icons[8]);
-            buttons[7][6].setIcon(icons[7]);
-            buttons[7][7].setIcon(icons[6]);
+            buttons[9][2].setIcon(icons[6]);
+            buttons[9][3].setIcon(icons[7]);
+            buttons[9][4].setIcon(icons[8]);
+            buttons[9][5].setIcon(icons[9]);
+            buttons[9][6].setIcon(icons[10]);
+            buttons[9][7].setIcon(icons[8]);
+            buttons[9][8].setIcon(icons[7]);
+            buttons[9][9].setIcon(icons[6]);
         }
     }
     private void setValuesForController(ActionEvent eventActionListener) {
@@ -130,24 +142,79 @@ class StartNewGame implements ActionListener {
     }
 
     private void checkIfICanMove() {
-        int fieldZero = Integer.parseInt(textField[0].getText());
-        int fieldOne = Integer.parseInt(textField[1].getText());
-        int fieldTwo = Integer.parseInt(textField[2].getText());
-        int fieldThree = Integer.parseInt(textField[3].getText());
+        if (buttons[fieldZero()][fieldOne()].getIcon() == icons[5]) {
+            moveBlackPawn();
+        } else if (buttons[fieldZero()][fieldOne()].getIcon() == icons[11]) {
+            moveWhitePawn();
+        } else if (buttons[fieldZero()][fieldOne()].getIcon() == icons[1] || buttons[fieldZero()][fieldOne()].getIcon() == icons[7]) {
+            moveKnight();
+        } else {
+            doMove();
+        }
+    }
 
-        boolean con1 = ((buttons[fieldTwo][fieldThree] == buttons[fieldZero + 1][fieldOne + 1]) && (buttons[fieldTwo][fieldThree].getIcon() != null));
-        boolean con2 = ((buttons[fieldTwo][fieldThree] == buttons[fieldZero + 1][fieldOne - 1]) && (buttons[fieldTwo][fieldThree].getIcon() != null));
+    private void moveBlackPawn() {
+        boolean SE = ((buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 1][fieldOne() + 1]) && !iconIsNull());
+        boolean SW = ((buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 1][fieldOne() - 1]) && !iconIsNull());
 
-        if (buttons[fieldZero][fieldOne].getIcon() == icons[5]) {
-            if (con1 || con2) {
-                doMove();
-            } else if ((buttons[fieldTwo][fieldThree] != buttons[fieldZero + 1][fieldOne])
-                    || (buttons[fieldTwo][fieldThree].getIcon() != null)) {
-                clearTextfields();
-            } else {
-                doMove();
-            }
-        } 
+        if (SE || SW) {
+            doMove();
+        } else if ((buttons[fieldTwo()][fieldThree()] != buttons[fieldZero() + 1][fieldOne()]) || !iconIsNull()) {
+            clearTextfields();
+        } else {
+            doMove();
+        }
+    }
+
+    private void moveWhitePawn() {
+        boolean NW = ((buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 1][fieldOne() - 1]) && !iconIsNull());
+        boolean NE = ((buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 1][fieldOne() + 1]) && !iconIsNull());
+
+        if (NW || NE) {
+            doMove();
+        } else if ((buttons[fieldTwo()][fieldThree()] != buttons[fieldZero() - 1][fieldOne()]) || !iconIsNull()) {
+            clearTextfields();
+        } else {
+            doMove();
+        }
+    }
+
+    private void moveKnight() { ;
+        boolean firstMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 2][fieldOne() + 1]);
+        boolean secondMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 2][fieldOne() - 1]);
+        boolean thirdMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 2][fieldOne() + 1]);
+        boolean fourthMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 2][fieldOne() - 1]);
+        boolean fifthMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 1][fieldOne() + 2]);
+        boolean sixthMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 1][fieldOne() - 2]);
+        boolean seventhMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 1][fieldOne() + 2]);
+        boolean eightMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 1][fieldOne() - 2]);
+
+        boolean SE = (firstMove && iconIsNull());
+        boolean SW = (secondMove && iconIsNull());
+        boolean NE = (thirdMove && iconIsNull());
+        boolean NW = (fourthMove && iconIsNull());
+        boolean SEE = (fifthMove && iconIsNull());
+        boolean SWW = (sixthMove && iconIsNull());
+        boolean NEE = (seventhMove && iconIsNull());
+        boolean NWW = (eightMove && iconIsNull());
+
+        boolean SE_2 = (firstMove && !iconIsNull());
+        boolean SW_2 = (secondMove && !iconIsNull());
+        boolean NE_2 = (thirdMove && !iconIsNull());
+        boolean NW_2 = (fourthMove && !iconIsNull());
+        boolean SEE_2 = (fifthMove && !iconIsNull());
+        boolean SWW_2 = (sixthMove && !iconIsNull());
+        boolean NEE_2 = (seventhMove && !iconIsNull());
+        boolean NWW_2 = (eightMove && !iconIsNull());
+
+
+        if (SE || SW || NE || NW || SEE || SWW || NEE || NWW) {
+            doMove();
+        } else if (SE_2 || SW_2 || NE_2 || NW_2 || SEE_2 || SWW_2 || NEE_2 || NWW_2) {
+            doMove();
+        } else {
+            clearTextfields();
+        }
     }
 
     private void doMove() {
@@ -167,6 +234,27 @@ class StartNewGame implements ActionListener {
             textField[i].setText(null);
         }
     }
+    private void hideFields() {
+        for (int x = 0; x < 12; x++) {
+            for (int y = 0; y < 2; y++)
+                buttons[x][y].setVisible(false);
+        }
+
+        for (int x = 0; x < 12; x++) {
+            for (int y = 10; y < 12; y++)
+                buttons[x][y].setVisible(false);
+        }
+
+        for (int x = 0; x < 2; x++) {
+            for (int y = 2; y < 10; y++)
+                buttons[x][y].setVisible(false);
+        }
+
+        for (int x = 10; x < 12; x++) {
+            for (int y = 2; y < 10; y++)
+                buttons[x][y].setVisible(false);
+        }
+    }
     void startNewGame() {
         JFrame drawFrame = new JFrame("Primordial Chess Game");
         JFrame drawSecondFrame = new JFrame();
@@ -180,6 +268,8 @@ class StartNewGame implements ActionListener {
             }
         }
 
+        hideFields();
+
         drawChessPieces();
         setColorsForBoard();
 
@@ -189,7 +279,7 @@ class StartNewGame implements ActionListener {
             drawSecondFrame.add(textField[textFieldIndex]);
         }
 
-        drawFrame.setLayout(new GridLayout(8, 8));
+        drawFrame.setLayout(new GridLayout(12, 12));
         drawFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         drawFrame.setSize(800, 800);
         drawFrame.setLocation(560, 140);
