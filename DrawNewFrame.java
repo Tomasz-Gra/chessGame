@@ -13,11 +13,6 @@ class StartNewGame implements ActionListener {
     private JTextField[] textField = new JTextField[6];
     private boolean[] protectChess = new boolean[12];
 
-    private Icon iconOne() { return buttons[fieldTwo()][fieldThree()].getIcon(); }
-
-    private JButton firstClicked() { return buttons[fieldZero()][fieldOne()]; }
-    private JButton secondClicked() { return buttons[fieldTwo()][fieldThree()]; }
-
     private int fieldZero() { return Integer.parseInt(textField[0].getText()); }
     private int fieldOne() { return Integer.parseInt(textField[1].getText()); }
     private int fieldTwo() { return Integer.parseInt(textField[2].getText()); }
@@ -25,6 +20,8 @@ class StartNewGame implements ActionListener {
     private boolean iconIsNull() { return buttons[fieldTwo()][fieldThree()].getIcon() == null; }
     private Color colorFieldYellow() { return new Color(250, 205, 115); }
     private Color colorFieldOrange() { return new Color(180, 120, 0); }
+    private JButton firstClicked() { return buttons[fieldZero()][fieldOne()]; }
+    private JButton secondClicked() { return buttons[fieldTwo()][fieldThree()]; }
 
     private void setColorsForBoard() {
         for (int x = 2; x < 10; x++) {
@@ -85,7 +82,7 @@ class StartNewGame implements ActionListener {
 
     private void protectOrMove() {
         for (int protectPiece = 0; protectPiece < 12; protectPiece++) {
-            protectChess[protectPiece] = buttons[fieldZero()][fieldOne()].getIcon() == icons[protectPiece];
+            protectChess[protectPiece] = firstClicked().getIcon() == icons[protectPiece];
         }
 
         if (!(textField[0].getText().isEmpty() && textField[1].getText().isEmpty())) {
@@ -94,7 +91,7 @@ class StartNewGame implements ActionListener {
                     protectBlackChess();
                 } else if (protectChess[6] || protectChess[7] || protectChess[8] || protectChess[9] || protectChess[10] || protectChess[11]) {
                     protectWhiteChess();
-                } else if (buttons[fieldZero()][fieldOne()].getIcon() == null) {
+                } else if (firstClicked().getIcon() == null) {
                     clearTextfields();
                 }
             }
@@ -160,21 +157,15 @@ class StartNewGame implements ActionListener {
     }
 
     private void moveKnight() {
-        boolean firstMove = (secondClicked() == buttons[fieldZero() + 2][fieldOne() + 1]);
-        boolean secondMove = (secondClicked() == buttons[fieldZero() + 2][fieldOne() - 1]);
-        boolean thirdMove = (secondClicked() == buttons[fieldZero() - 2][fieldOne() + 1]);
-        boolean fourthMove = (secondClicked() == buttons[fieldZero() - 2][fieldOne() - 1]);
-        boolean fifthMove = (secondClicked() == buttons[fieldZero() + 1][fieldOne() + 2]);
-        boolean sixthMove = (secondClicked() == buttons[fieldZero() + 1][fieldOne() - 2]);
-        boolean seventhMove = (secondClicked() == buttons[fieldZero() - 1][fieldOne() + 2]);
-        boolean eightMove = (secondClicked() == buttons[fieldZero() - 1][fieldOne() - 2]);
-
-        boolean[] booleans = {firstMove, secondMove, thirdMove, fourthMove, fifthMove, sixthMove, seventhMove, eightMove};
+        boolean[] booleans = new boolean[8];
         boolean[] bIconIsNull = new boolean[8];
         boolean[] bIconIsNotNull = new boolean[8];
 
-        for (int i = 0; i < booleans.length; i++) { bIconIsNull[i] = booleans[i] && iconIsNull(); }
-        for (int i = 0; i < booleans.length; i++) { bIconIsNotNull[i] = booleans[i] && !iconIsNull(); }
+        JButton[] checkMove = {buttons[fieldZero() + 2][fieldOne() + 1], buttons[fieldZero() + 2][fieldOne() - 1], buttons[fieldZero() - 2][fieldOne() + 1], buttons[fieldZero() - 2][fieldOne() - 1], buttons[fieldZero() + 1][fieldOne() + 2], buttons[fieldZero() + 1][fieldOne() - 2], buttons[fieldZero() - 1][fieldOne() + 2], buttons[fieldZero() - 1][fieldOne() - 2]};
+
+        for (int checkMovement = 0; checkMovement < checkMove.length; checkMovement++) { booleans[checkMovement] = secondClicked() == checkMove[checkMovement]; }
+        for (int iconIsNull = 0; iconIsNull < booleans.length; iconIsNull++) { bIconIsNull[iconIsNull] = booleans[iconIsNull] && iconIsNull(); }
+        for (int iconIsNotNull = 0; iconIsNotNull < booleans.length; iconIsNotNull++) { bIconIsNotNull[iconIsNotNull] = booleans[iconIsNotNull] && !iconIsNull(); }
 
         if (bIconIsNull[0] || bIconIsNull[1] || bIconIsNull[2] || bIconIsNull[3] || bIconIsNull[4] || bIconIsNull[5] || bIconIsNull[6] || bIconIsNull[7]) {
             doMove();
