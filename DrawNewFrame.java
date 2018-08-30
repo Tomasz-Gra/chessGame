@@ -5,23 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class StartNewGame implements ActionListener {
-
-    private String[] iconNames = {"img/black-rook.png", "img/black-knight.png", "img/black-bishop.png", "img/black-queen.png", "img/black-king.png", "img/black-pawn.png", "img/white-rook.png", "img/white-knight.png", "img/white-bishop.png", "img/white-queen.png", "img/white-king.png", "img/white-pawn.png"};
-    private ImageIcon[] icons = new ImageIcon[12];
-    private JButton[][] buttons = new JButton[12][12];
-    private JTextField[] textField = new JTextField[6];
-    private boolean[] protectChess = new boolean[12];
-
-    private int fieldZero() { return Integer.parseInt(textField[0].getText()); }
-    private int fieldOne() { return Integer.parseInt(textField[1].getText()); }
-    private int fieldTwo() { return Integer.parseInt(textField[2].getText()); }
-    private int fieldThree() { return Integer.parseInt(textField[3].getText()); }
-    private boolean iconIsNull() { return buttons[fieldTwo()][fieldThree()].getIcon() == null; }
-    private Color colorFieldYellow() { return new Color(250, 205, 115); }
-    private Color colorFieldOrange() { return new Color(180, 120, 0); }
-    private JButton firstClicked() { return buttons[fieldZero()][fieldOne()]; }
-    private JButton secondClicked() { return buttons[fieldTwo()][fieldThree()]; }
+class StartNewGame extends Variables implements ActionListener {
 
     private void setColorsForBoard() {
         for (int x = 2; x < 10; x++) {
@@ -119,11 +103,11 @@ class StartNewGame implements ActionListener {
     }
 
     private void checkIfICanMove() {
-        if (buttons[fieldZero()][fieldOne()].getIcon() == icons[5]) {
+        if (firstClicked().getIcon() == icons[5]) {
             moveBlackPawn();
-        } else if (buttons[fieldZero()][fieldOne()].getIcon() == icons[11]) {
+        } else if (firstClicked().getIcon() == icons[11]) {
             moveWhitePawn();
-        } else if (buttons[fieldZero()][fieldOne()].getIcon() == icons[1] || buttons[fieldZero()][fieldOne()].getIcon() == icons[7]) {
+        } else if (firstClicked().getIcon() == icons[1] || firstClicked().getIcon() == icons[7]) {
             moveKnight();
         } else {
             doMove();
@@ -161,9 +145,9 @@ class StartNewGame implements ActionListener {
         boolean[] bIconIsNull = new boolean[8];
         boolean[] bIconIsNotNull = new boolean[8];
 
-        JButton[] checkMove = {buttons[fieldZero() + 2][fieldOne() + 1], buttons[fieldZero() + 2][fieldOne() - 1], buttons[fieldZero() - 2][fieldOne() + 1], buttons[fieldZero() - 2][fieldOne() - 1], buttons[fieldZero() + 1][fieldOne() + 2], buttons[fieldZero() + 1][fieldOne() - 2], buttons[fieldZero() - 1][fieldOne() + 2], buttons[fieldZero() - 1][fieldOne() - 2]};
+        JButton[] checkIfCanMove = {buttons[fieldZero() + 2][fieldOne() + 1], buttons[fieldZero() + 2][fieldOne() - 1], buttons[fieldZero() - 2][fieldOne() + 1], buttons[fieldZero() - 2][fieldOne() - 1], buttons[fieldZero() + 1][fieldOne() + 2], buttons[fieldZero() + 1][fieldOne() - 2], buttons[fieldZero() - 1][fieldOne() + 2], buttons[fieldZero() - 1][fieldOne() - 2]};
 
-        for (int checkMovement = 0; checkMovement < checkMove.length; checkMovement++) { booleans[checkMovement] = secondClicked() == checkMove[checkMovement]; }
+        for (int checkMovement = 0; checkMovement < checkIfCanMove.length; checkMovement++) { booleans[checkMovement] = secondClicked() == checkIfCanMove[checkMovement]; }
         for (int iconIsNull = 0; iconIsNull < booleans.length; iconIsNull++) { bIconIsNull[iconIsNull] = booleans[iconIsNull] && iconIsNull(); }
         for (int iconIsNotNull = 0; iconIsNotNull < booleans.length; iconIsNotNull++) { bIconIsNotNull[iconIsNotNull] = booleans[iconIsNotNull] && !iconIsNull(); }
 
