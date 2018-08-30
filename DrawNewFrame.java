@@ -7,21 +7,9 @@ import java.awt.event.ActionListener;
 
 class StartNewGame implements ActionListener {
 
-    private ImageIcon bPawn = new ImageIcon("img/black-pawn.png");
-    private ImageIcon bRook = new ImageIcon("img/black-rook.png");
-    private ImageIcon bKnight = new ImageIcon("img/black-knight.png");
-    private ImageIcon bBishop = new ImageIcon("img/black-bishop.png");
-    private ImageIcon bQueen = new ImageIcon("img/black-queen.png");
-    private ImageIcon bKing = new ImageIcon("img/black-king.png");
-    private ImageIcon wPawn = new ImageIcon("img/white-pawn.png");
-    private ImageIcon wRook = new ImageIcon("img/white-rook.png");
-    private ImageIcon wKnight = new ImageIcon("img/white-knight.png");
-    private ImageIcon wBishop = new ImageIcon("img/white-bishop.png");
-    private ImageIcon wQueen = new ImageIcon("img/white-queen.png");
-    private ImageIcon wKing = new ImageIcon("img/white-king.png");
-    //-------------------- ICONS --------------------
+    private String[] iconNames = {"img/black-rook.png", "img/black-knight.png", "img/black-bishop.png", "img/black-queen.png", "img/black-king.png", "img/black-pawn.png", "img/white-rook.png", "img/white-knight.png", "img/white-bishop.png", "img/white-queen.png", "img/white-king.png", "img/white-pawn.png"};
+    private ImageIcon[] icons = new ImageIcon[12];
 
-    private ImageIcon[] icons = {bRook, bKnight, bBishop, bQueen, bKing, bPawn, wRook, wKnight, wBishop, wQueen, wKing, wPawn};
     private JButton[][] buttons = new JButton[12][12];
     private JTextField[] textField = new JTextField[6];
     private boolean[] protectChess = new boolean[12];
@@ -52,24 +40,18 @@ class StartNewGame implements ActionListener {
         }
     }
     private void drawChessPieces() {
+        for (int i = 0; i < iconNames.length; i++) { icons[i] = new ImageIcon(iconNames[i]); }
+
         for (int x = 2; x < 10; x++) { buttons[3][x].setIcon(icons[5]); }
-        for (int drawIcon = 0; drawIcon < 6; drawIcon++) {
-            buttons[2][2].setIcon(icons[0]);
-            buttons[2][3].setIcon(icons[1]);
-            buttons[2][4].setIcon(icons[2]);
-            buttons[2][5].setIcon(icons[3]);
-            buttons[2][6].setIcon(icons[4]);
+        for (int drawIcon = 0; drawIcon < 5; drawIcon++) {
+            buttons[2][drawIcon + 2].setIcon(icons[drawIcon]);
             buttons[2][7].setIcon(icons[2]);
             buttons[2][8].setIcon(icons[1]);
             buttons[2][9].setIcon(icons[0]);
         }
         for (int x = 2; x < 10; x++) { buttons[8][x].setIcon(icons[11]); }
         for (int drawIcon = 6; drawIcon < 11; drawIcon++) {
-            buttons[9][2].setIcon(icons[6]);
-            buttons[9][3].setIcon(icons[7]);
-            buttons[9][4].setIcon(icons[8]);
-            buttons[9][5].setIcon(icons[9]);
-            buttons[9][6].setIcon(icons[10]);
+            buttons[9][drawIcon - 4].setIcon(icons[drawIcon]);
             buttons[9][7].setIcon(icons[8]);
             buttons[9][8].setIcon(icons[7]);
             buttons[9][9].setIcon(icons[6]);
@@ -115,7 +97,6 @@ class StartNewGame implements ActionListener {
         }
     }
     private void protectBlackChess() {
-
         for (int protectBlackPiece = 0; protectBlackPiece < 12; protectBlackPiece++) {
             protectChess[protectBlackPiece] = buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() == icons[protectBlackPiece];
         }
@@ -126,7 +107,6 @@ class StartNewGame implements ActionListener {
         }
     }
     private void protectWhiteChess() {
-
         for (int protectWhitePiece = 6; protectWhitePiece < 12; protectWhitePiece++) {
             protectChess[protectWhitePiece] = buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() == icons[protectWhitePiece];
         }
@@ -184,19 +164,15 @@ class StartNewGame implements ActionListener {
         boolean sixthMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 1][fieldOne() - 2]);
         boolean seventhMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 1][fieldOne() + 2]);
         boolean eightMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 1][fieldOne() - 2]);
-        
+
         boolean[] booleans = {firstMove, secondMove, thirdMove, fourthMove, fifthMove, sixthMove, seventhMove, eightMove};
         boolean[] bIconIsNull = new boolean[8];
         boolean[] bIconIsNotNull = new boolean[8];
 
-        for (int i = 0; i < booleans.length; i++) {
-            bIconIsNull[i] = booleans[i] && iconIsNull();
-        }
+        for (int i = 0; i < booleans.length; i++) { bIconIsNull[i] = booleans[i] && iconIsNull(); }
 
-        for (int i = 0; i < booleans.length; i++) {
-            bIconIsNotNull[i] = booleans[i] && !iconIsNull();
-        }
-        
+        for (int i = 0; i < booleans.length; i++) { bIconIsNotNull[i] = booleans[i] && !iconIsNull(); }
+
         if (bIconIsNull[0] || bIconIsNull[1] || bIconIsNull[2] || bIconIsNull[3] || bIconIsNull[4] || bIconIsNull[5] || bIconIsNull[6] || bIconIsNull[7]) {
             doMove();
         } else if (bIconIsNotNull[0] || bIconIsNotNull[1] || bIconIsNotNull[2] || bIconIsNotNull[3] || bIconIsNotNull[4] || bIconIsNotNull[5] || bIconIsNotNull[6] || bIconIsNotNull[7]) {
@@ -257,7 +233,6 @@ class StartNewGame implements ActionListener {
         }
 
         hideFields();
-
         drawChessPieces();
         setColorsForBoard();
 
