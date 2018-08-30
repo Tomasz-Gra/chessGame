@@ -22,4 +22,17 @@ class Variables {
     Color colorFieldOrange() { return new Color(180, 120, 0); }
     JButton firstClicked() { return buttons[fieldZero()][fieldOne()]; }
     JButton secondClicked() { return buttons[fieldTwo()][fieldThree()]; }
+
+    void doMove() {
+        secondClicked().setIcon(firstClicked().getIcon());
+        if (secondClicked().getIcon() != null) {
+            firstClicked().setIcon(null);
+            clearTextfields();
+        }
+    }
+    void clearTextfields() {
+        for (int i = 0; i < 4; i++) {
+            textField[i].setText(null);
+        }
+    }
 }
