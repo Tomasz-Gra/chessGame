@@ -13,6 +13,11 @@ class StartNewGame implements ActionListener {
     private JTextField[] textField = new JTextField[6];
     private boolean[] protectChess = new boolean[12];
 
+    private Icon iconOne() { return buttons[fieldTwo()][fieldThree()].getIcon(); }
+
+    private JButton firstClicked() { return buttons[fieldZero()][fieldOne()]; }
+    private JButton secondClicked() { return buttons[fieldTwo()][fieldThree()]; }
+
     private int fieldZero() { return Integer.parseInt(textField[0].getText()); }
     private int fieldOne() { return Integer.parseInt(textField[1].getText()); }
     private int fieldTwo() { return Integer.parseInt(textField[2].getText()); }
@@ -80,7 +85,7 @@ class StartNewGame implements ActionListener {
 
     private void protectOrMove() {
         for (int protectPiece = 0; protectPiece < 12; protectPiece++) {
-            protectChess[protectPiece] = buttons[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon() == icons[protectPiece];
+            protectChess[protectPiece] = buttons[fieldZero()][fieldOne()].getIcon() == icons[protectPiece];
         }
 
         if (!(textField[0].getText().isEmpty() && textField[1].getText().isEmpty())) {
@@ -89,7 +94,7 @@ class StartNewGame implements ActionListener {
                     protectBlackChess();
                 } else if (protectChess[6] || protectChess[7] || protectChess[8] || protectChess[9] || protectChess[10] || protectChess[11]) {
                     protectWhiteChess();
-                } else if (buttons[Integer.parseInt(textField[0].getText())][Integer.parseInt(textField[1].getText())].getIcon() == null) {
+                } else if (buttons[fieldZero()][fieldOne()].getIcon() == null) {
                     clearTextfields();
                 }
             }
@@ -97,7 +102,7 @@ class StartNewGame implements ActionListener {
     }
     private void protectBlackChess() {
         for (int protectBlackPiece = 0; protectBlackPiece < 12; protectBlackPiece++) {
-            protectChess[protectBlackPiece] = buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() == icons[protectBlackPiece];
+            protectChess[protectBlackPiece] = buttons[fieldTwo()][fieldThree()].getIcon() == icons[protectBlackPiece];
         }
         if (protectChess[0] || protectChess[1] || protectChess[2] || protectChess[3] || protectChess[4] || protectChess[5]){
             clearTextfields();
@@ -107,7 +112,7 @@ class StartNewGame implements ActionListener {
     }
     private void protectWhiteChess() {
         for (int protectWhitePiece = 6; protectWhitePiece < 12; protectWhitePiece++) {
-            protectChess[protectWhitePiece] = buttons[Integer.parseInt(textField[2].getText())][Integer.parseInt(textField[3].getText())].getIcon() == icons[protectWhitePiece];
+            protectChess[protectWhitePiece] = buttons[fieldTwo()][fieldThree()].getIcon() == icons[protectWhitePiece];
         }
         if (protectChess[6] || protectChess[7] || protectChess[8] || protectChess[9] || protectChess[10] || protectChess[11]){
             clearTextfields();
@@ -129,12 +134,12 @@ class StartNewGame implements ActionListener {
     }
 
     private void moveBlackPawn() {
-        boolean SE = ((buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 1][fieldOne() + 1]) && !iconIsNull());
-        boolean SW = ((buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 1][fieldOne() - 1]) && !iconIsNull());
+        boolean SE = ((secondClicked() == buttons[fieldZero() + 1][fieldOne() + 1]) && !iconIsNull());
+        boolean SW = ((secondClicked() == buttons[fieldZero() + 1][fieldOne() - 1]) && !iconIsNull());
 
         if (SE || SW) {
             doMove();
-        } else if ((buttons[fieldTwo()][fieldThree()] != buttons[fieldZero() + 1][fieldOne()]) || !iconIsNull()) {
+        } else if ((secondClicked() != buttons[fieldZero() + 1][fieldOne()]) || !iconIsNull()) {
             clearTextfields();
         } else {
             doMove();
@@ -142,12 +147,12 @@ class StartNewGame implements ActionListener {
     }
 
     private void moveWhitePawn() {
-        boolean NW = ((buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 1][fieldOne() - 1]) && !iconIsNull());
-        boolean NE = ((buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 1][fieldOne() + 1]) && !iconIsNull());
+        boolean NW = ((secondClicked() == buttons[fieldZero() - 1][fieldOne() - 1]) && !iconIsNull());
+        boolean NE = ((secondClicked() == buttons[fieldZero() - 1][fieldOne() + 1]) && !iconIsNull());
 
         if (NW || NE) {
             doMove();
-        } else if ((buttons[fieldTwo()][fieldThree()] != buttons[fieldZero() - 1][fieldOne()]) || !iconIsNull()) {
+        } else if ((secondClicked() != buttons[fieldZero() - 1][fieldOne()]) || !iconIsNull()) {
             clearTextfields();
         } else {
             doMove();
@@ -155,14 +160,14 @@ class StartNewGame implements ActionListener {
     }
 
     private void moveKnight() {
-        boolean firstMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 2][fieldOne() + 1]);
-        boolean secondMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 2][fieldOne() - 1]);
-        boolean thirdMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 2][fieldOne() + 1]);
-        boolean fourthMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 2][fieldOne() - 1]);
-        boolean fifthMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 1][fieldOne() + 2]);
-        boolean sixthMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() + 1][fieldOne() - 2]);
-        boolean seventhMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 1][fieldOne() + 2]);
-        boolean eightMove = (buttons[fieldTwo()][fieldThree()] == buttons[fieldZero() - 1][fieldOne() - 2]);
+        boolean firstMove = (secondClicked() == buttons[fieldZero() + 2][fieldOne() + 1]);
+        boolean secondMove = (secondClicked() == buttons[fieldZero() + 2][fieldOne() - 1]);
+        boolean thirdMove = (secondClicked() == buttons[fieldZero() - 2][fieldOne() + 1]);
+        boolean fourthMove = (secondClicked() == buttons[fieldZero() - 2][fieldOne() - 1]);
+        boolean fifthMove = (secondClicked() == buttons[fieldZero() + 1][fieldOne() + 2]);
+        boolean sixthMove = (secondClicked() == buttons[fieldZero() + 1][fieldOne() - 2]);
+        boolean seventhMove = (secondClicked() == buttons[fieldZero() - 1][fieldOne() + 2]);
+        boolean eightMove = (secondClicked() == buttons[fieldZero() - 1][fieldOne() - 2]);
 
         boolean[] booleans = {firstMove, secondMove, thirdMove, fourthMove, fifthMove, sixthMove, seventhMove, eightMove};
         boolean[] bIconIsNull = new boolean[8];
@@ -181,9 +186,9 @@ class StartNewGame implements ActionListener {
     }
 
     private void doMove() {
-        buttons[fieldTwo()][fieldThree()].setIcon(buttons[fieldZero()][fieldOne()].getIcon());
-        if (buttons[fieldTwo()][fieldThree()].getIcon() != null) {
-            buttons[fieldZero()][fieldOne()].setIcon(null);
+        secondClicked().setIcon(firstClicked().getIcon());
+        if (secondClicked().getIcon() != null) {
+            firstClicked().setIcon(null);
             clearTextfields();
         }
     }
