@@ -6,8 +6,6 @@ import java.awt.*;
 class Variables {
     String[] iconNames = {"img/black-rook.png", "img/black-knight.png", "img/black-bishop.png", "img/black-queen.png", "img/black-king.png", "img/black-pawn.png", "img/white-rook.png", "img/white-knight.png", "img/white-bishop.png", "img/white-queen.png", "img/white-king.png", "img/white-pawn.png"};
 
-    //Integer[] numbers = {fieldZero() + 1, fieldZero() - 1, fieldZero() + 2, fieldZero() - 2, fieldTwo() + 1, fieldTwo() - 1, fieldTwo() + 2, fieldTwo() - 1};
-
     ImageIcon[] icons = new ImageIcon[12];
     JButton[][] buttons = new JButton[12][12];
     JTextField[] textField = new JTextField[6];
