@@ -9,7 +9,6 @@ class StartNewGame implements ActionListener {
 
     private String[] iconNames = {"img/black-rook.png", "img/black-knight.png", "img/black-bishop.png", "img/black-queen.png", "img/black-king.png", "img/black-pawn.png", "img/white-rook.png", "img/white-knight.png", "img/white-bishop.png", "img/white-queen.png", "img/white-king.png", "img/white-pawn.png"};
     private ImageIcon[] icons = new ImageIcon[12];
-
     private JButton[][] buttons = new JButton[12][12];
     private JTextField[] textField = new JTextField[6];
     private boolean[] protectChess = new boolean[12];
@@ -170,7 +169,6 @@ class StartNewGame implements ActionListener {
         boolean[] bIconIsNotNull = new boolean[8];
 
         for (int i = 0; i < booleans.length; i++) { bIconIsNull[i] = booleans[i] && iconIsNull(); }
-
         for (int i = 0; i < booleans.length; i++) { bIconIsNotNull[i] = booleans[i] && !iconIsNull(); }
 
         if (bIconIsNull[0] || bIconIsNull[1] || bIconIsNull[2] || bIconIsNull[3] || bIconIsNull[4] || bIconIsNull[5] || bIconIsNull[6] || bIconIsNull[7]) {
@@ -183,14 +181,9 @@ class StartNewGame implements ActionListener {
     }
 
     private void doMove() {
-        int fieldZero = Integer.parseInt(textField[0].getText());
-        int fieldOne = Integer.parseInt(textField[1].getText());
-        int fieldTwo = Integer.parseInt(textField[2].getText());
-        int fieldThree = Integer.parseInt(textField[3].getText());
-
-        buttons[fieldTwo][fieldThree].setIcon(buttons[fieldZero][fieldOne].getIcon());
-        if (buttons[fieldTwo][fieldThree].getIcon() != null) {
-            buttons[fieldZero][fieldOne].setIcon(null);
+        buttons[fieldTwo()][fieldThree()].setIcon(buttons[fieldZero()][fieldOne()].getIcon());
+        if (buttons[fieldTwo()][fieldThree()].getIcon() != null) {
+            buttons[fieldZero()][fieldOne()].setIcon(null);
             clearTextfields();
         }
     }
@@ -200,24 +193,12 @@ class StartNewGame implements ActionListener {
         }
     }
     private void hideFields() {
-        for (int x = 0; x < 12; x++) {
-            for (int y = 0; y < 2; y++)
-                buttons[x][y].setVisible(false);
-        }
 
         for (int x = 0; x < 12; x++) {
-            for (int y = 10; y < 12; y++)
-                buttons[x][y].setVisible(false);
-        }
-
-        for (int x = 0; x < 2; x++) {
-            for (int y = 2; y < 10; y++)
-                buttons[x][y].setVisible(false);
-        }
-
-        for (int x = 10; x < 12; x++) {
-            for (int y = 2; y < 10; y++)
-                buttons[x][y].setVisible(false);
+            for (int y = 0; y < 12; y++)
+                if (!((x < 2) || (x > 9) || (y < 2) || (y > 9))) {
+                    buttons[x][y].setVisible(true);
+                }
         }
     }
     void startNewGame() {
@@ -226,6 +207,7 @@ class StartNewGame implements ActionListener {
         for (int x = 0; x < buttons.length; x++) {
             for (int y = 0; y < buttons.length; y++) {
                 buttons[x][y] = new JButton();
+                buttons[x][y].setVisible(false);
                 buttons[x][y].setFocusPainted(false);
                 buttons[x][y].addActionListener(this);
                 drawFrame.add(buttons[x][y]);
