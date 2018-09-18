@@ -35,54 +35,56 @@ class Variables {
         }
     }
 
-    Icon isIconOneDown() { return buttons[fieldZero() + 1][fieldOne()].getIcon(); }
-    Icon isIconOneUp() { return buttons[fieldZero() - 1][fieldOne()].getIcon(); }
-    Icon isIconOneRight() { return buttons[fieldZero()][fieldOne() + 1].getIcon(); }
-    Icon isIconOneLeft() { return buttons[fieldZero()][fieldOne() - 1].getIcon(); }
+    Icon _I_1D() { return buttons[fieldZero() + 1][fieldOne()].getIcon(); }
+    Icon _I_1U() { return buttons[fieldZero() - 1][fieldOne()].getIcon(); }
+    Icon _I_1R() { return buttons[fieldZero()][fieldOne() + 1].getIcon(); }
+    Icon _I_1L() { return buttons[fieldZero()][fieldOne() - 1].getIcon(); }
 
-    Icon isIconOneUpOneRight() { return buttons[fieldZero() - 1][fieldOne() + 1].getIcon(); }
-    Icon isIconOneUpOneLeft() { return buttons[fieldZero() - 1][fieldOne() - 1].getIcon(); }
-    Icon isIconOneDownOneRight() { return buttons[fieldZero() + 1][fieldOne() + 1].getIcon(); }
-    Icon isIconOneDownOneLeft() { return buttons[fieldZero() + 1][fieldOne() - 1].getIcon(); }
+    Icon _I_1U1R() { return buttons[fieldZero() - 1][fieldOne() + 1].getIcon(); }
+    Icon _I_1U1L() { return buttons[fieldZero() - 1][fieldOne() - 1].getIcon(); }
+    Icon _I_1D1R() { return buttons[fieldZero() + 1][fieldOne() + 1].getIcon(); }
+    Icon _I_1D1L() { return buttons[fieldZero() + 1][fieldOne() - 1].getIcon(); }
+    
+    boolean iNull() { return iconIsNull(); }
 
-    boolean fightOneUp() { return secondClicked() == buttons[fieldZero() - 1][fieldOne()] && !iconIsNull(); }
-    boolean fightOneDown() { return secondClicked() == buttons[fieldZero() + 1][fieldOne()] && !iconIsNull(); }
-    boolean fightOneRight() { return secondClicked() == buttons[fieldZero()][fieldOne() + 1] && !iconIsNull(); }
-    boolean fightOneLeft() { return secondClicked() == buttons[fieldZero()][fieldOne() - 1] && !iconIsNull(); }
+    boolean _F_1U_B0() { return secondClicked() == buttons[fieldZero() - 1][fieldOne()] && !iconIsNull(); }
+    boolean _F_1D_B1() { return secondClicked() == buttons[fieldZero() + 1][fieldOne()] && !iconIsNull(); }
+    boolean _F_1R_B2() { return secondClicked() == buttons[fieldZero()][fieldOne() + 1] && !iconIsNull(); }
+    boolean _F_1L_B3() { return secondClicked() == buttons[fieldZero()][fieldOne() - 1] && !iconIsNull(); }
 
-    boolean fightTwoUp() { return secondClicked() == buttons[fieldZero() - 2][fieldOne()] && !iconIsNull(); }
-    boolean fightTwoDown() { return secondClicked() == buttons[fieldZero() + 2][fieldOne()] && !iconIsNull(); }
-    boolean fightTwoRight() { return secondClicked() == buttons[fieldZero()][fieldOne() + 2] && !iconIsNull(); }
-    boolean fightTwoLeft() { return secondClicked() == buttons[fieldZero()][fieldOne() - 2] && !iconIsNull(); }
+    boolean _F_2U_B4() { return secondClicked() == buttons[fieldZero() - 2][fieldOne()] && !iconIsNull(); }
+    boolean _F_2D_B5() { return secondClicked() == buttons[fieldZero() + 2][fieldOne()] && !iconIsNull(); }
+    boolean _F_2R_B6() { return secondClicked() == buttons[fieldZero()][fieldOne() + 2] && !iconIsNull(); }
+    boolean _F_2L_B7() { return secondClicked() == buttons[fieldZero()][fieldOne() - 2] && !iconIsNull(); }
 
-    boolean fightOneUpOneRight() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() + 1] && !iconIsNull(); }
-    boolean fightOneUpOneLeft() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() - 1] && !iconIsNull(); }
-    boolean fightOneDownOneRight() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() + 1] && !iconIsNull(); }
-    boolean fightOneDownOneLeft() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() - 1] && !iconIsNull(); }
+    boolean _F_1U_1R_B8() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() + 1] && !iconIsNull(); }
+    boolean _F_1U_1L_B9() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() - 1] && !iconIsNull(); }
+    boolean _F_1D_1R_B10() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() + 1] && !iconIsNull(); }
+    boolean _F_1D_1L_B11() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() - 1] && !iconIsNull(); }
 
-    boolean fightTwoUpTwoRight() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() + 2] && !iconIsNull(); }
-    boolean fightTwoUpTwoLeft() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() - 2] && !iconIsNull(); }
-    boolean fightTwoDownTwoRight() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() + 2] && !iconIsNull(); }
-    boolean fightTwoDownTwoLeft() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() - 2] && !iconIsNull(); }
+    boolean _F_2U_2R_B12() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() + 2] && !iconIsNull(); }
+    boolean _F_2U_2L_B13() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() - 2] && !iconIsNull(); }
+    boolean _F_2D_2R_B14() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() + 2] && !iconIsNull(); }
+    boolean _F_2D_2L_B15() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() - 2] && !iconIsNull(); }
 
-    boolean moveOneUp() { return secondClicked() == buttons[fieldZero() - 1][fieldOne()] && iconIsNull(); }
-    boolean moveOneDown() { return secondClicked() == buttons[fieldZero() + 1][fieldOne()] && iconIsNull(); }
-    boolean moveOneRight() { return secondClicked() == buttons[fieldZero()][fieldOne() + 1] && iconIsNull(); }
-    boolean moveOneLeft() { return secondClicked() == buttons[fieldZero()][fieldOne() - 1] && iconIsNull(); }
+    boolean _M_1U_B0() { return secondClicked() == buttons[fieldZero() - 1][fieldOne()] && iconIsNull(); }
+    boolean _M_1D_B1() { return secondClicked() == buttons[fieldZero() + 1][fieldOne()] && iconIsNull(); }
+    boolean _M_1R_B2() { return secondClicked() == buttons[fieldZero()][fieldOne() + 1] && iconIsNull(); }
+    boolean _M_1L_B3() { return secondClicked() == buttons[fieldZero()][fieldOne() - 1] && iconIsNull(); }
 
-    boolean moveTwoUp() { return secondClicked() == buttons[fieldZero() - 2][fieldOne()] && iconIsNull(); }
-    boolean moveTwoDown() { return secondClicked() == buttons[fieldZero() + 2][fieldOne()] && iconIsNull(); }
-    boolean moveTwoRight() { return secondClicked() == buttons[fieldZero()][fieldOne() + 2] && iconIsNull(); }
-    boolean moveTwoLeft() { return secondClicked() == buttons[fieldZero()][fieldOne() - 2] && iconIsNull(); }
+    boolean _M_2U_B4() { return secondClicked() == buttons[fieldZero() - 2][fieldOne()] && iconIsNull(); }
+    boolean _M_2D_B5() { return secondClicked() == buttons[fieldZero() + 2][fieldOne()] && iconIsNull(); }
+    boolean _M_2R_B6() { return secondClicked() == buttons[fieldZero()][fieldOne() + 2] && iconIsNull(); }
+    boolean _M_2L_B7() { return secondClicked() == buttons[fieldZero()][fieldOne() - 2] && iconIsNull(); }
 
-    boolean moveOneUpOneRight() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() + 1] && iconIsNull(); }
-    boolean moveOneUpOneLeft() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() - 1] && iconIsNull(); }
-    boolean moveOneDownOneRight() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() + 1] && iconIsNull(); }
-    boolean moveOneDownOneLeft() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() - 1] && iconIsNull(); }
+    boolean _M_1U_1R_B8() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() + 1] && iconIsNull(); }
+    boolean _M_1U_1L_B9() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() - 1] && iconIsNull(); }
+    boolean _M_1D_1R_B10() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() + 1] && iconIsNull(); }
+    boolean _M_1D_1L_B11() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() - 1] && iconIsNull(); }
 
-    boolean moveTwoUpTwoRight() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() + 2] && iconIsNull(); }
-    boolean moveTwoUpTwoLeft() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() - 2] && iconIsNull(); }
-    boolean moveTwoDownTwoRight() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() + 2] && iconIsNull(); }
-    boolean moveTwoDownTwoLeft() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() - 2] && iconIsNull(); }
+    boolean _M_2U_2R_B12() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() + 2] && iconIsNull(); }
+    boolean _M_2U_2L_B13() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() - 2] && iconIsNull(); }
+    boolean _M_2D_2R_B14() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() + 2] && iconIsNull(); }
+    boolean _M_2D_2L_B15() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() - 2] && iconIsNull(); }
 
 }
