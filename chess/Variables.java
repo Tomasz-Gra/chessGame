@@ -84,4 +84,5 @@ class Variables {
     boolean moveTwoUpTwoLeft() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() - 2] && iconIsNull(); }
     boolean moveTwoDownTwoRight() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() + 2] && iconIsNull(); }
     boolean moveTwoDownTwoLeft() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() - 2] && iconIsNull(); }
+
 }
