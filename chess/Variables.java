@@ -46,34 +46,34 @@ class Variables {
     Icon _I_1D1R() { return buttons[fieldZero() + 1][fieldOne() + 1].getIcon(); }
     Icon _I_1D1L() { return buttons[fieldZero() + 1][fieldOne() - 1].getIcon(); }
 
-    boolean _F_1U() { return secondClicked() == buttons[fieldZero() - 1][fieldOne()]; }
-    boolean _F_1D() { return secondClicked() == buttons[fieldZero() + 1][fieldOne()]; }
-    boolean _F_1R() { return secondClicked() == buttons[fieldZero()][fieldOne() + 1]; }
-    boolean _F_1L() { return secondClicked() == buttons[fieldZero()][fieldOne() - 1]; }
+    boolean _1U() { return secondClicked() == buttons[fieldZero() - 1][fieldOne()]; }
+    boolean _1D() { return secondClicked() == buttons[fieldZero() + 1][fieldOne()]; }
+    boolean _1R() { return secondClicked() == buttons[fieldZero()][fieldOne() + 1]; }
+    boolean _1L() { return secondClicked() == buttons[fieldZero()][fieldOne() - 1]; }
 
-    boolean _F_2U() { return secondClicked() == buttons[fieldZero() - 2][fieldOne()]; }
-    boolean _F_2D() { return secondClicked() == buttons[fieldZero() + 2][fieldOne()]; }
-    boolean _F_2R() { return secondClicked() == buttons[fieldZero()][fieldOne() + 2]; }
-    boolean _F_2L() { return secondClicked() == buttons[fieldZero()][fieldOne() - 2]; }
+    boolean _2U() { return secondClicked() == buttons[fieldZero() - 2][fieldOne()]; }
+    boolean _2D() { return secondClicked() == buttons[fieldZero() + 2][fieldOne()]; }
+    boolean _2R() { return secondClicked() == buttons[fieldZero()][fieldOne() + 2]; }
+    boolean _2L() { return secondClicked() == buttons[fieldZero()][fieldOne() - 2]; }
 
-    boolean _F_1U_1R() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() + 1]; }
-    boolean _F_1U_1L() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() - 1]; }
-    boolean _F_1D_1R() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() + 1]; }
-    boolean _F_1D_1L() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() - 1]; }
+    boolean _1U1R() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() + 1]; }
+    boolean _1U1L() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() - 1]; }
+    boolean _1D1R() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() + 1]; }
+    boolean _1D1L() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() - 1]; }
 
-    boolean _F_2U_2R() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() + 2]; }
-    boolean _F_2U_2L() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() - 2]; }
-    boolean _F_2D_2R() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() + 2]; }
-    boolean _F_2D_2L() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() - 2]; }
+    boolean _2U2R() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() + 2]; }
+    boolean _2U2L() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() - 2]; }
+    boolean _2D2R() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() + 2]; }
+    boolean _2D2L() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() - 2]; }
 
-    boolean _2D_1R() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() + 1]; }
-    boolean _2D_1L() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() - 1]; }
-    boolean _2U_1R() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() + 1]; }
-    boolean _2U_1L() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() - 1]; }
+    boolean _2D1R() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() + 1]; }
+    boolean _2D1L() { return secondClicked() == buttons[fieldZero() + 2][fieldOne() - 1]; }
+    boolean _2U1R() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() + 1]; }
+    boolean _2U1L() { return secondClicked() == buttons[fieldZero() - 2][fieldOne() - 1]; }
 
-    boolean _1D_2R() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() + 2]; }
-    boolean _1D_2L() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() - 2]; }
-    boolean _1U_2R() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() + 2]; }
-    boolean _1U_2L() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() - 2]; }
+    boolean _1D2R() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() + 2]; }
+    boolean _1D2L() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() - 2]; }
+    boolean _1U2R() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() + 2]; }
+    boolean _1U2L() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() - 2]; }
 
 }
