@@ -1,6 +1,6 @@
 package chessGame;
 
-class ProtectOrMove extends MovePieces {
+class ProtectOrMove extends MovePieces{
 
     void protectOrMove() {
         for (int protectPiece = 0; protectPiece < 12; protectPiece++) {
@@ -47,6 +47,14 @@ class ProtectOrMove extends MovePieces {
             moveWhitePawn();
         } else if (firstClicked().getIcon() == icons[1] || firstClicked().getIcon() == icons[7]) {
             moveKnight();
+        } else if (firstClicked().getIcon() == icons[2] || firstClicked().getIcon() == icons[8]) {
+            moveBishop();
+        } else if (firstClicked().getIcon() == icons[0] || firstClicked().getIcon() == icons[6]) {
+            moveRook();
+        } else if (firstClicked().getIcon() == icons[3] || firstClicked().getIcon() == icons[9]) {
+            moveQueen();
+        } else if (firstClicked().getIcon() == icons[4] || firstClicked().getIcon() == icons[10]) {
+            moveKing();
         } else {
             doMove();
         }
