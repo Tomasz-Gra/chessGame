@@ -5,7 +5,7 @@ import javax.swing.*;
 class MovePieces extends SetValuesForControllers{
 
     void moveBlackPawn() {
-        if (fightOneDownOneLeft()|| fightOneDownOneRight()) {
+        if (_F_1D_1L_B11()|| _F_1D_1R_B10()) {
             doMove();
         } else if ((secondClicked() != buttons[fieldZero() + 1][fieldOne()]) || !iconIsNull()) {
             clearTextfields();
@@ -15,7 +15,7 @@ class MovePieces extends SetValuesForControllers{
     }
 
     void moveWhitePawn() {
-        if (fightOneUpOneRight() || fightOneUpOneLeft()) {
+        if (_F_1U_1R_B8() || _F_1U_1L_B9()) {
             doMove();
         } else if ((secondClicked() != buttons[fieldZero() - 1][fieldOne()]) || !iconIsNull()) {
             clearTextfields();
@@ -51,9 +51,9 @@ class MovePieces extends SetValuesForControllers{
     }
 
     void moveBishop() {
-        if (fightOneDownOneRight() || (fightTwoDownTwoRight() && isIconOneDownOneRight() == null) || fightOneDownOneLeft() || (fightTwoDownTwoLeft() && isIconOneDownOneLeft() == null) || fightOneUpOneRight() || (fightTwoUpTwoRight() && isIconOneUpOneRight() == null) || fightOneUpOneLeft() || (fightTwoUpTwoLeft() && isIconOneUpOneLeft() == null)) {
+        if (_F_1D_1R_B10() || (_F_2D_2R_B14() && _I_1D1R() == null) || _F_1D_1L_B11() || (_F_2D_2L_B15() && _I_1D1L() == null) || _F_1U_1R_B8() || (_F_2U_2R_B12() && _I_1U1R() == null) || _F_1U_1L_B9() || (_F_2U_2L_B13() && _I_1U1L() == null)) {
             doMove();
-        } else if (moveOneUpOneRight() || (moveTwoUpTwoRight() && isIconOneUpOneRight() == null) || moveOneUpOneLeft() || (moveTwoUpTwoLeft() && isIconOneUpOneLeft() == null) || moveOneDownOneRight() || (moveTwoDownTwoRight() && isIconOneDownOneRight() == null) || moveOneDownOneLeft() || (moveTwoDownTwoLeft() && isIconOneDownOneLeft() == null)) {
+        } else if (_M_1U_1R_B8() || (_M_2U_2R_B12() && _I_1U1R() == null) || _M_1U_1L_B9() || (_M_2U_2L_B13() && _I_1U1L() == null) || _M_1D_1R_B10() || (_M_2D_2R_B14() && _I_1D1R() == null) || _M_1D_1L_B11() || (_M_2D_2L_B15() && _I_1D1L() == null)) {
             doMove();
         } else {
             clearTextfields();
@@ -61,9 +61,9 @@ class MovePieces extends SetValuesForControllers{
     }
 
     void moveRook() {
-        if (fightOneUp() || (fightTwoUp() && isIconOneUp() == null)  || fightOneDown() || (fightTwoDown() && isIconOneDown() == null) || fightOneRight() || (fightTwoRight() && isIconOneRight() == null) || fightOneLeft()|| (fightTwoLeft() && isIconOneLeft() == null)) {
+        if (_F_1U_B0() || (_F_2U_B4() && _I_1U() == null)  || _F_1D_B1() || (_F_2D_B5() && _I_1D() == null) || _F_1R_B2() || (_F_2R_B6() && _I_1R() == null) || _F_1L_B3()|| (_F_2L_B7() && _I_1L() == null)) {
             doMove();
-        } else if ((moveOneUp()) || (moveTwoUp() && isIconOneUp() == null) || (moveOneDown() || (moveTwoDown() && isIconOneDown() == null)) || moveOneRight() || (moveTwoRight() && isIconOneRight() == null) || moveOneLeft() || (moveTwoLeft() && isIconOneLeft() == null)) {
+        } else if ((_M_1U_B0()) || (_M_2U_B4() && _I_1U() == null) || (_M_1D_B1() || (_M_2D_B5() && _I_1D() == null)) || _M_1R_B2() || (_M_2R_B6() && _I_1R() == null) || _M_1L_B3() || (_M_2L_B7() && _I_1L() == null)) {
             doMove();
         } else {
             clearTextfields();
@@ -71,11 +71,11 @@ class MovePieces extends SetValuesForControllers{
     }
 
     void moveQueen() {
-        if ((moveOneUp()) || (moveTwoUp() && isIconOneUp() == null) || moveOneDown() || (moveTwoDown() && isIconOneDown() == null) || moveOneRight() || (moveTwoRight() && isIconOneRight() == null) || moveOneLeft() || (moveTwoLeft() && isIconOneLeft() == null) || (moveOneUpOneRight() || moveOneUpOneLeft() || moveOneDownOneRight() || moveOneDownOneLeft() || (moveTwoUpTwoRight() && isIconOneUpOneRight() == null) || (moveTwoUpTwoLeft() && isIconOneUpOneLeft() == null) || (moveTwoDownTwoRight() && isIconOneDownOneRight() == null) || (moveTwoDownTwoLeft() && isIconOneDownOneLeft() == null))) {
+        if ((_M_1U_B0()) || (_M_2U_B4() && _I_1U() == null) || _M_1D_B1() || (_M_2D_B5() && _I_1D() == null) || _M_1R_B2() || (_M_2R_B6() && _I_1R() == null) || _M_1L_B3() || (_M_2L_B7() && _I_1L() == null) || (_M_1U_1R_B8() || _M_1U_1L_B9() || _M_1D_1R_B10() || _M_1D_1L_B11() || (_M_2U_2R_B12() && _I_1U1R() == null) || (_M_2U_2L_B13() && _I_1U1L() == null) || (_M_2D_2R_B14() && _I_1D1R() == null) || (_M_2D_2L_B15() && _I_1D1L() == null))) {
             doMove();
-        } else if (fightOneUp() || (fightTwoUp() && isIconOneUp() == null)  || fightOneDown() || (fightTwoDown() && isIconOneDown() == null) || fightOneRight() || (fightTwoRight() && isIconOneRight() == null) || fightOneLeft() || (fightTwoLeft() && isIconOneLeft() == null) ) {
+        } else if (_F_1U_B0() || (_F_2U_B4() && _I_1U() == null)  || _F_1D_B1() || (_F_2D_B5() && _I_1D() == null) || _F_1R_B2() || (_F_2R_B6() && _I_1R() == null) || _F_1L_B3() || (_F_2L_B7() && _I_1L() == null) ) {
             doMove();
-        } else if (fightOneDownOneRight() || (fightTwoDownTwoRight() && isIconOneDownOneRight() == null) || fightOneDownOneLeft() || (fightTwoDownTwoLeft() && isIconOneDownOneLeft() == null) || fightOneUpOneRight() || (fightTwoUpTwoRight() && isIconOneUpOneRight() == null) || fightOneUpOneLeft() || (fightTwoUpTwoLeft() && isIconOneUpOneLeft() == null)) {
+        } else if (_F_1D_1R_B10() || (_F_2D_2R_B14() && _I_1D1R() == null) || _F_1D_1L_B11() || (_F_2D_2L_B15() && _I_1D1L() == null) || _F_1U_1R_B8() || (_F_2U_2R_B12() && _I_1U1R() == null) || _F_1U_1L_B9() || (_F_2U_2L_B13() && _I_1U1L() == null)) {
             doMove();
         } else {
             clearTextfields();
@@ -83,9 +83,9 @@ class MovePieces extends SetValuesForControllers{
     }
 
     void moveKing() {
-        if ((fightOneUp()) || fightOneDown() || fightOneRight() || fightOneLeft() || fightOneUpOneRight() || fightOneUpOneLeft() || fightOneDownOneRight() || fightOneDownOneLeft()) {
+        if ((_F_1U_B0()) || _F_1D_B1() || _F_1R_B2() || _F_1L_B3() || _F_1U_1R_B8() || _F_1U_1L_B9() || _F_1D_1R_B10() || _F_1D_1L_B11()) {
             doMove();
-        } else if ((moveOneUp()) || moveOneDown() || moveOneRight() || moveOneLeft() || moveOneUpOneRight() || moveOneUpOneLeft() || moveOneDownOneRight() || moveOneDownOneLeft()) {
+        } else if ((_M_1U_B0()) || _M_1D_B1() || _M_1R_B2() || _M_1L_B3() || _M_1U_1R_B8() || _M_1U_1L_B9() || _M_1D_1R_B10() || _M_1D_1L_B11()) {
             doMove();
         } else {
             clearTextfields();
