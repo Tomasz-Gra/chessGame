@@ -8,7 +8,7 @@ class Variables {
 
     ImageIcon[] icons = new ImageIcon[12];
     JButton[][] buttons = new JButton[12][12];
-    JTextField[] textField = new JTextField[6];
+    JTextField[] textField = new JTextField[4];
     boolean[] protectChess = new boolean[12];
 
     private int fieldZero() { return Integer.parseInt(textField[0].getText()); }
@@ -26,6 +26,8 @@ class Variables {
         secondClicked().setIcon(firstClicked().getIcon());
         if (secondClicked().getIcon() != null) {
             firstClicked().setIcon(null);
+            clearTextfields();
+        } else {
             clearTextfields();
         }
     }
@@ -75,5 +77,4 @@ class Variables {
     boolean _1D2L() { return secondClicked() == buttons[fieldZero() + 1][fieldOne() - 2]; }
     boolean _1U2R() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() + 2]; }
     boolean _1U2L() { return secondClicked() == buttons[fieldZero() - 1][fieldOne() - 2]; }
-
 }
