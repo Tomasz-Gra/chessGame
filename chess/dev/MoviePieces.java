@@ -140,7 +140,7 @@ class MovePieces extends SetValuesForControllers{
             if (_1D1R() || (_2D2R() && _I_1D1R() == null) || _1D1L() || _1U1R() || _1U1L()) {
                 doMove();
             }
-        }else if (_B12() || _B13() || _B14() || _B15()) {
+        } else if (_B12() || _B13() || _B14() || _B15()) {
             if (_1D1R() || (_2D2R() && _I_1D1R() == null) || _1D1L() || (_2D2L() && _I_1D1L() == null) || _1U1R() || _1U1L()) {
                 doMove();
             }
@@ -324,11 +324,56 @@ class MovePieces extends SetValuesForControllers{
     }
 
     void moveKing() {
-        /*
-        if (_1U() || _1D() || _1R() || _1L() || _1U1R() || _1U1L() || _1D1R() || _1D1L()) {
+        if (_B00()) {
+            if (_1D() || _1R() || _1D1R()) {
+                doMove();
+            }
+        } else if (_B01() || _B06()) {
+            if (_1D() || _1R() || _1L() || _1D1R() || _1D1L()) {
+                doMove();
+            }
+        } else if (_B02() || _B03() || _B04() || _B05()) {
+            if (_1D() || _1R() || _1L() || _1D1R() || _1D1L()) {
+                doMove();
+            }
+        } else if (_B07()) {
+            if (_1D() || _1L() || _1D1L()) {
+                doMove();
+            }
+        } else if (_B10() || _B60()) {
+            if (_1U() || _1D() || _1R() || _1U1R() || _1D1R()) {
+                doMove();
+            }
+        } else if (_B17() || _B67()) {
+            if (_1U() || _1D() || _1L() || _1U1L() || _1D1L()) {
+                doMove();
+            }
+        } else if (_B70()) {
+            if (_1U() || _1R() || _1U1R()) {
+                doMove();
+            }
+        } else if (_B71() || _B76()) {
+            if (_1U() || _1R() || _1L() || _1U1R() || _1U1L()) {
+                doMove();
+            }
+        } else if (_B72() || _B73() || _B74() || _B75()) {
+            if (_1U() || _1R() || _1L() || _1U1R() || _1U1L()) {
+                doMove();
+            }
+        } else if (_B77()) {
+            if (_1U() || _1L() || _1U1L()) {
+                doMove();
+            }
+        } else if (_B20() || _B30() || _B40() || _B50()) {
+            if (_1U() || _1D() || _1R() || _1U1R() || _1D1R()) {
+                doMove();
+            }
+        } else if (_B27() || _B37() || _B47() || _B57()) {
+            if (_1U() || _1D() || _1L() || _1U1L() || _1D1L()) {
+                doMove();
+            }
+        } else if (_1U() || _1D() || _1R() || _1L() || _1U1R() || _1U1L() || _1D1R() || _1D1L()) {
             doMove();
         }
-        */
-        doMove();
     }
 }
