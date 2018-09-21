@@ -342,11 +342,11 @@ class MovePieces extends SetValuesForControllers{
 
 
         } else if (_B10()) {
-            if (_1U() || _1D() || (_2D() && _I_1D() == null) || _1R() || (_2R() && _I_1R() == null) || _1L() || (_2L() && _I_1L() == null) || _1D1R() || (_2D2R() && _I_1D1R() == null) || _1D1L() || (_2D2L() && _I_1D1L() == null) || _1U1R() || _1U1L()) {
+            if (_1U() || _1D() || (_2D() && _I_1D() == null) || _1R() || (_2R() && _I_1R() == null) || _1D1R() || (_2D2R() && _I_1D1R() == null) || _1U1R()) {
                 doMove();
             }
         } else if (_B11()) {
-            if (_1U() || _1D() || (_2D() && _I_1D() == null) || _1R() || (_2R() && _I_1R() == null) || _1L() || (_2L() && _I_1L() == null) || _1D1R() || (_2D2R() && _I_1D1R() == null) || _1D1L() || (_2D2L() && _I_1D1L() == null) || _1U1R() || _1U1L()) {
+            if (_1U() || _1D() || (_2D() && _I_1D() == null) || _1R() || (_2R() && _I_1R() == null) || _1L() || _1D1R() || (_2D2R() && _I_1D1R() == null) || _1D1L() || _1U1R() || _1U1L()) {
                 doMove();
             }
         }else if (_B12() || _B13() || _B14() || _B15()) {
@@ -354,11 +354,11 @@ class MovePieces extends SetValuesForControllers{
                 doMove();
             }
         } else if (_B16()) {
-            if (_1U() || _1D() || (_2D() && _I_1D() == null) || _1R() || (_2R() && _I_1R() == null) || _1L() || (_2L() && _I_1L() == null) || _1D1R() || (_2D2R() && _I_1D1R() == null) || _1D1L() || (_2D2L() && _I_1D1L() == null) || _1U1R() || _1U1L()) {
+            if (_1U() || _1D() || (_2D() && _I_1D() == null) || _1R() || _1L() || (_2L() && _I_1L() == null) || _1D1R() || _1D1L() || (_2D2L() && _I_1D1L() == null) || _1U1R() || _1U1L()) {
                 doMove();
             }
         } else if (_B17()) {
-            if (_1U() || _1D() || (_2D() && _I_1D() == null) || _1R() || (_2R() && _I_1R() == null) || _1L() || (_2L() && _I_1L() == null) || _1D1R() || (_2D2R() && _I_1D1R() == null) || _1D1L() || (_2D2L() && _I_1D1L() == null) || _1U1R()  || _1U1L()) {
+            if (_1U() || _1D() || (_2D() && _I_1D() == null) || _1L() || (_2L() && _I_1L() == null) || _1D1L() || (_2D2L() && _I_1D1L() == null) || _1U1L()) {
                 doMove();
             }
 
@@ -366,23 +366,23 @@ class MovePieces extends SetValuesForControllers{
 
 
         } else if (_B60()) {
-            if (_1U() || (_2U() && _I_1U() == null)  || _1D() || _1R() || (_2R() && _I_1R() == null) || _1L() || (_2L() && _I_1L() == null) || _1D1R() || (_2D2R() && _I_1D1R() == null) || _1D1L() || (_2D2L() && _I_1D1L() == null) || _1U1R() || _1U1L()) {
+            if (_1U() || (_2U() && _I_1U() == null) || _1D() || _1R() || (_2R() && _I_1R() == null) || _1D1R() || _1U1R() || (_2U2R() && _I_1U1R() == null)) {
                 doMove();
             }
         } else if (_B61()) {
-            if (_1U() || (_2U() && _I_1U() == null)  || _1D() || _1R() || (_2R() && _I_1R() == null) || _1L() || (_2L() && _I_1L() == null) || _1D1R() || (_2D2R() && _I_1D1R() == null) || _1D1L() || (_2D2L() && _I_1D1L() == null) || _1U1R() || _1U1L()) {
+            if (_1U() || (_2U() && _I_1U() == null) || _1D() || _1R() || (_2R() && _I_1R() == null) || _1L() || _1D1R() || _1D1L() || _1U1R() || (_2U2R() && _I_1U1R() == null) || _1U1L()) {
                 doMove();
             }
         } else if (_B62() || _B63() || _B64() || _B65()) {
-            if (_1U() || (_2U() && _I_1U() == null)  || _1D() || _1R() || (_2R() && _I_1R() == null) || _1L() || (_2L() && _I_1L() == null) || _1D1R() || (_2D2R() && _I_1D1R() == null) || _1D1L() || (_2D2L() && _I_1D1L() == null) || _1U1R() || _1U1L()) {
+            if (_1U() || (_2U() && _I_1U() == null) || _1D() || _1R() || (_2R() && _I_1R() == null) || _1L() || (_2L() && _I_1L() == null) || _1D1R() || _1D1L() || _1U1R() || (_2U2R() && _I_1U1R() == null) || _1U1L() || (_2U2L() && _I_1U1L() == null)) {
                 doMove();
             }
         } else if (_B66()) {
-            if (_1U() || (_2U() && _I_1U() == null)  || _1D() || _1R() || (_2R() && _I_1R() == null) || _1L() || (_2L() && _I_1L() == null) || _1D1R() || (_2D2R() && _I_1D1R() == null) || _1D1L() || (_2D2L() && _I_1D1L() == null) || _1U1R() || _1U1L()) {
+            if (_1U() || (_2U() && _I_1U() == null) || _1D() || _1R() || _1L() || (_2L() && _I_1L() == null) || _1D1R() || _1D1L() || _1U1R() || _1U1L() || (_2U2L() && _I_1U1L() == null)) {
                 doMove();
             }
         } else if (_B67()) {
-            if (_1U() || (_2U() && _I_1U() == null)  || _1D() || _1R() || (_2R() && _I_1R() == null) || _1L() || (_2L() && _I_1L() == null) || _1D1R() || (_2D2R() && _I_1D1R() == null) || _1D1L() || (_2D2L() && _I_1D1L() == null) || _1U1R() || _1U1L()) {
+            if (_1U() || (_2U() && _I_1U() == null)  || _1D() || _1L() || (_2L() && _I_1L() == null) || _1D1L() || _1U1L() || (_2U2L() && _I_1U1L() == null)) {
                 doMove();
             }
 
