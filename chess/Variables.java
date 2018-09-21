@@ -15,12 +15,11 @@ class Variables {
     private int fieldOne() { return Integer.parseInt(textField[1].getText()); }
     int fieldTwo() { return Integer.parseInt(textField[2].getText()); }
     int fieldThree() { return Integer.parseInt(textField[3].getText()); }
-    private boolean iconIsNull() { return buttons[fieldTwo()][fieldThree()].getIcon() == null; }
     Color colorFieldYellow() { return new Color(250, 205, 115); }
     Color colorFieldOrange() { return new Color(180, 120, 0); }
     JButton firstClicked() { return buttons[fieldZero()][fieldOne()]; }
     private JButton secondClicked() { return buttons[fieldTwo()][fieldThree()]; }
-    boolean iNull() { return iconIsNull(); }
+    boolean iNull() { return buttons[fieldTwo()][fieldThree()].getIcon() == null; }
 
     void doMove() {
         secondClicked().setIcon(firstClicked().getIcon());
